@@ -1,10 +1,27 @@
 <h1>Post Index</h1>
 
-<%  %>
+<%= link_to "Make New Post", new_post_url  %>
+<br><br>
 
 <% @posts.each do |post| %>
-<%  %>
-<%= post.title %>
-<br><br>
-<%  %>
+
+  <!-- image logic -->
+  <% if post.url.include?(".jpg") || post.url.include?(".gif")  %>
+    <img src="<%= post.url %>" height="100" width="100">
+  <% else %>
+    <%= image_tag("no_img.gif", size: "100x100") %>
+  <% end %>
+
+  <!-- link logic -->
+  <% if post.url != "" %>
+    <%= link_to post.title, post.url %>
+  <% else %>
+      <%= link_to post.title, post_url(post) %>
+  <% end %>
+
+  <!-- Comments -->
+  <%= link_to "Comments", post_url(post)  %>
+  <br><br><br>
+
 <% end %>
+
