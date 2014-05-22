@@ -5,6 +5,9 @@
   <input type="hidden" name="authenticity_token"
   value="<%= form_authenticity_token %>">
 
+  <input type="hidden" name="comment[parent_id]"
+  value="<%= params[:parent_id] %>">
+
   <label>Body
   <input type="text" name="comment[body]" value="">
   <label>

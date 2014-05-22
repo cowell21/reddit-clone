@@ -1,6 +1,10 @@
 <!-- recursive commment template -->
 <p>
-  <%= link_to comment.body, post_comment_url(comment.post.id, comment.id) %>
+
+  <%= "#{comment.body} " %><br>
+  <%= link_to "-> reply",
+   new_post_comment_url( parent_id: comment.id ) %>
+   <!-- comment.post.id, comment.id -->
 </p>
 
 <ul>

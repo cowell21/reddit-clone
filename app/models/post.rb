@@ -9,6 +9,11 @@ class Post < ActiveRecord::Base
   foreign_key: :post_id,
   primary_key: :id
 
+  has_many :votes,
+  class_name: "UserVote",
+  foreign_key: :post_id,
+  primary_key: :id
+
   def comments_by_parent
     comments_by_parent = Hash.new { |hash, key| hash[key] = [] }
 
