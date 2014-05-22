@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    url_fix
     @post = Post.new(post_params)
     @post.user_id = current_user.id
 
@@ -21,7 +22,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    #prb wrong
     @post = Post.find(params[:id])
   end
 
@@ -42,6 +42,12 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :url, :body, :sub)
+  end
+
+  def url_fix
+    if !params[:post][:url].include?("http://") && params[:post][:url] != ""
+      params[:post][:url] =  "http://" + params[:post][:url]
+    end
   end
 
 end

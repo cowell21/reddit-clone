@@ -17,10 +17,19 @@
   <!-- link logic -->
   <% if @post.url != "" %>
     <%= link_to @post.title, @post.url %>
+    (<%= @post.url.split('/')[2] %>)
   <% else %>
       <%= link_to @post.title, post_url(post) %>
   <% end %>
 
+  <!-- time logic -->
+  <% hours = (Time.now.to_i - @post.created_at.to_i) / 3600 %>
+  <%= " Submited #{hours} hours ago " %>
+
+  <!-- owner logic -->
+  <%= " by #{@post.user.username}" %>
+
+<!-- end of post display -->
 <br>
 <h3>Body: </h3><%= @post.body %>
 

@@ -1,12 +1,11 @@
 <h1>Post Index</h1>
 
-
-<br><br>
+<br>
 
 <!-- todo: sort by votes -->
 <% @posts.each do |post| %>
 
-  <!-- net upvote/downvote -->
+  <!-- net upvote/downvote display -->
   <button>upvote</button>
   <%= post.value %>
   <button>downvote</button>
@@ -21,11 +20,20 @@
   <!-- link logic -->
   <% if post.url != "" %>
     <%= link_to post.title, post.url %>
+    (<%= post.url.split('/')[2] %>)
   <% else %>
       <%= link_to post.title, post_url(post) %>
   <% end %>
+  <br>
 
-  <!-- Comments -->
+  <!-- time logic -->
+  <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
+  <%= " Submited #{hours} hours ago " %>
+
+  <!-- owner logic -->
+  <%= " by #{post.user.username}" %>
+
+  <!-- Comments Link -->
   <%= link_to "Comments", post_comments_url(post)  %>
   <br><br><br>
 
