@@ -42,8 +42,7 @@
 
 <!-- Next & Prev link pagation logic -->
 <!-- generates links like localhost:3000/?count=5 -->
-
-<%= link_to_if(@count && @count - 5 >= 0 ,
- "< Prev ", root_url(count: (@count - 5)) ) %>
-<%= link_to_if( @total > @count + 5,
- " Next >", root_url(count: @count + 5) )%>
+<%= link_to_if(@count && @count - @pagesize >= 0 ,
+ "< Prev ", root_url(count: (@count - @pagesize)) ) %>
+<%= link_to_if( @total > @count + @pagesize,
+ " Next >", root_url(count: @count + @pagesize) )%>

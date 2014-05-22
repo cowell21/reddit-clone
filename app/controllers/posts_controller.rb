@@ -21,18 +21,19 @@ class PostsController < ApplicationController
     @posts = Post.all.sort_by(&:value).reverse
     params[:count] ? @count = params[:count].to_i : @count = 0
     @total = @posts.length # need this to be used in erb
+    @pagesize = 5
 
     #pagination logic # ?count=5
-    if @count % 5 == 0 && @count < @total
+    if @count % @pagesize == 0 && @count < @total
 
-      if (@count + 5) > @posts.length
+      if (@count + @pagesize) > @posts.length
         @posts = @posts[@count...@total]
       else
-        @posts = @posts[@count..(@count + 4)]
+        @posts = @posts[@count..(@count + @pagesize - 1)]
       end
 
     else
-      @posts = @posts[0..4] if @total > 6
+      @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
     end
 
   end
