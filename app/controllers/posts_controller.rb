@@ -19,19 +19,20 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.sort_by(&:value).reverse
-    count = params[:count].to_i if params[:count]
+    params[:count] ? @count = params[:count].to_i : @count = 0
+    @total = @posts.length # need this to be used in erb
 
     #pagination logic # ?count=5
-    if count && count % 5 == 0
+    if @count % 5 == 0 && @count < @total
 
-      if (count + 5) > @posts.length
-        @posts = @posts[count...@posts.length]
+      if (@count + 5) > @posts.length
+        @posts = @posts[@count...@total]
       else
-        @posts = @posts[count..(count + 4)]
+        @posts = @posts[@count..(@count + 4)]
       end
 
     else
-      @posts = @posts[0..4] if @posts.length > 6
+      @posts = @posts[0..4] if @total > 6
     end
 
   end
