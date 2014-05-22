@@ -18,7 +18,22 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by(&:value).reverse
+    count = params[:count].to_i if params[:count]
+
+    #pagination logic # ?count=5
+    if count && count % 5 == 0
+
+      if (count + 5) > @posts.length
+        @posts = @posts[count...@posts.length]
+      else
+        @posts = @posts[count..(count + 4)]
+      end
+
+    else
+      @posts = @posts[0..4] if @posts.length > 6
+    end
+
   end
 
   def show
@@ -26,11 +41,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
-
   end
 
   def destroy
