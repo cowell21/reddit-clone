@@ -1,0 +1,16 @@
+<h1>New Post</h1>
+
+<form action="<%= post_comments_url %>" method="post">
+
+  <input type="hidden" name="authenticity_token"
+  value="<%= form_authenticity_token %>">
+
+  <label>Body
+  <input type="text" name="comment[body]" value="">
+  <label>
+
+  <br>
+
+  <input type="submit" value="Add Post">
+
+</form>

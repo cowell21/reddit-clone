@@ -1,9 +1,15 @@
 <h1>Post Index</h1>
 
-<%= link_to "Make New Post", new_post_url  %>
+
 <br><br>
 
+<!-- todo: sort by votes -->
 <% @posts.each do |post| %>
+
+  <!-- net upvote/downvote -->
+  <button>upvote</button>
+  <%= post.value %>
+  <button>downvote</button>
 
   <!-- image logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif")  %>
@@ -20,7 +26,7 @@
   <% end %>
 
   <!-- Comments -->
-  <%= link_to "Comments", post_url(post)  %>
+  <%= link_to "Comments", post_comments_url(post)  %>
   <br><br><br>
 
 <% end %>
