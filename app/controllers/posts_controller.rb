@@ -53,13 +53,13 @@ class PostsController < ApplicationController
 
   def upvote
     @post = Post.find(params[:id])
-    vote(1)
+    vote(1) if current_user
     redirect_to root_url
   end
 
   def downvote
     @post = Post.find(params[:id])
-    vote(-1)
+    vote(-1) if current_user
     redirect_to root_url
   end
 

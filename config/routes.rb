@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
   resources :posts do
     resources :comments, only: [:create, :new, :show, :index]
     member do

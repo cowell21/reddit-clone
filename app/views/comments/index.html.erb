@@ -3,9 +3,9 @@
 <h1><%= @post.title %></h1>
 
   <!-- net upvote/downvote -->
-  <button>upvote</button>
-  <%= @post.value %>
-  <button>downvote</button>
+  <%= button_to "Upvote", upvote_post_url(action: :upvote, id: @post.id) %>
+  <%= @post.votes.sum(:value) %>
+  <%= button_to "Downvote", downvote_post_url(action: :downvote, id: @post.id) %>
 
   <!-- image logic -->
   <% if @post.url.include?(".jpg") || @post.url.include?(".gif")  %>
@@ -24,10 +24,10 @@
 
   <!-- time logic -->
   <% hours = (Time.now.to_i - @post.created_at.to_i) / 3600 %>
-  <%= " Submited #{hours} hours ago " %>
+  <%= " Submited #{hours} hours ago by " %>
 
   <!-- owner logic -->
-  <%= " by #{@post.user.username}" %>
+  <%= link_to @post.user.username, user_url(@post.user) %>
 
 <br>
 <!-- end of post display -->
