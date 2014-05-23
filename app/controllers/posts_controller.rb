@@ -18,23 +18,18 @@ class PostsController < ApplicationController
   end
 
   def index
-
     @posts = Post.all.sort_by(&:sum_votes).reverse
-
-    #@posts = Post.all.sort_by(&:value).reverse
     params[:count] ? @count = params[:count].to_i : @count = 0
-    @total = @posts.length # need this to be used in erb
-    @pagesize = 5
+    @total = @posts.length
+    @pagesize = 5 # change index page size here
 
-    #pagination logic # ?count=5
+    #paganation happens here
     if @count % @pagesize == 0 && @count < @total
-
       if (@count + @pagesize) > @posts.length
         @posts = @posts[@count...@total]
       else
         @posts = @posts[@count..(@count + @pagesize - 1)]
       end
-
     else
       @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
     end
@@ -81,14 +76,13 @@ class PostsController < ApplicationController
   end
 
   def vote(direction)
-     @vote = Vote.find_by_post_id_and_user_id(@post.id, current_user.id)
+    @vote = Vote.find_by_post_id_and_user_id(@post.id, current_user.id)
 
-     if @vote
-       @vote.value == direction ? @vote.update_attributes(value: 0) : @vote.update_attributes(value: direction)
-     else
-       @post.votes.create(user_id: current_user.id, value: direction)
-     end
-
-   end
+    if @vote
+      @vote.value == direction ? @vote.update_attributes(value: 0) : @vote.update_attributes(value: direction)
+    else
+      @post.votes.create(user_id: current_user.id, value: direction)
+    end
+  end
 
 end

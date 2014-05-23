@@ -1,10 +1,8 @@
 <h1>Post Index</h1>
 
-<br>
-
 <!-- todo: sort by votes -->
 <% @posts.each_with_index do |post, idx| %>
-
+  <div class="postsummary" id="div<%= ( @count + idx + 1 ) %>">
   <!-- rank number logic -->
   #<%= ( @count + idx + 1 ) %>
 
@@ -37,10 +35,19 @@
   <%= link_to post.user.username, user_url(post.user) %>
 
   <!-- Comments Link -->
-  <%= link_to "Comments", post_comments_url(post)  %>
+  <%= link_to " #{post.comments.length} Comments ", post_comments_url(post)  %>
 
-  <br><br><br>
+  <!-- hide jquery logic -->
+  <%= javascript_tag "  $(document).ready(function(){
+    $('#link#{( @count + idx + 1 )}').click(function(){
+      $('#div#{( @count + idx + 1 )}').fadeOut('slow');
+    });
+  });" %>
+  <!-- jquery link to fadeout -->
+  <a href="#" id="link<%=( @count + idx + 1 )%>">hide</a>
 
+  </div>
+  <br>
 <% end %>
 
 <!-- Next & Prev link pagation logic -->
