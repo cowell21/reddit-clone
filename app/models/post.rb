@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   primary_key: :id
 
   has_many :votes,
-  class_name: "UserVote",
+  class_name: "Vote",
   foreign_key: :post_id,
   primary_key: :id
 
@@ -24,9 +24,9 @@ class Post < ActiveRecord::Base
     comments_by_parent
   end
 
-  def votes
-    self.user_votes.sum(:value)
+  def sum_votes
+    # a.votes.sum(:value) <- works like this
+    self.votes.sum(:value)
   end
-
 
 end

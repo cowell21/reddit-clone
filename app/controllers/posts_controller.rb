@@ -18,7 +18,10 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.sort_by(&:value).reverse
+
+    @posts = Post.all.sort_by(&:sum_votes).reverse
+
+    #@posts = Post.all.sort_by(&:value).reverse
     params[:count] ? @count = params[:count].to_i : @count = 0
     @total = @posts.length # need this to be used in erb
     @pagesize = 5
@@ -48,6 +51,18 @@ class PostsController < ApplicationController
   def update
   end
 
+  def upvote
+    @post = Post.find(params[:id])
+    vote(1)
+    redirect_to root_url
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    vote(-1)
+    redirect_to root_url
+  end
+
   def destroy
     post = Post.find(params[:id])
     post.destroy
@@ -64,5 +79,16 @@ class PostsController < ApplicationController
       params[:post][:url] =  "http://" + params[:post][:url]
     end
   end
+
+  def vote(direction)
+     @vote = Vote.find_by_post_id_and_user_id(@post.id, current_user.id)
+
+     if @vote
+       @vote.value == direction ? @vote.update_attributes(value: 0) : @vote.update_attributes(value: direction)
+     else
+       @post.votes.create(user_id: current_user.id, value: direction)
+     end
+
+   end
 
 end

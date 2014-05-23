@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
 
   has_many :posts, inverse_of: :user
+  has_many :votes, inverse_of: :user
+
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
