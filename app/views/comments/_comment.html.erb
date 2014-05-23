@@ -1,11 +1,30 @@
 <!-- recursive commment template -->
-<p>
-
+<div class="comment-div" id="div-comment-<%=comment.id%>" >
+  <%= link_to comment.user.username, user_url(comment.user) %>
+  <%=  %>
+  <% hours = (Time.now.to_i - comment.created_at.to_i) / 3600 %>
+  <%= " #{hours} hours ago" %>
+  <br>
   <%= "#{comment.body} " %><br>
-  <%= link_to "-> reply",
+  <%= link_to "reply",
    new_post_comment_url( parent_id: comment.id ) %>
-   <!-- comment.post.id, comment.id -->
-</p>
+  <!-- hide jquery logic -->
+  <%= javascript_tag "  $(document).ready(function(){
+    $('#comment-#{comment.id}-hide').click(function(){
+      $('#div-comment-#{comment.id}').fadeOut('slow');
+    });
+  });" %>
+  <!-- jquery link to fadeout -->
+  <a href="#" id="comment-<%= comment.id %>-hide">hide</a>
+
+  <%= link_to "report", '#' %>
+
+  <!-- delete logic if owner -->
+  <% if current_user == comment.user %>
+    <%= link_to "delete", post_comment_url(id: comment.id), method: :delete %>
+  <% end %>
+</div>
+<br>
 
 <ul>
   <% comments_by_parent[comment.id].each do |child_comment| %>

@@ -1,8 +1,8 @@
-<h1>Post Index</h1>
+<h3>Post Index</h3>
 
 <!-- todo: sort by votes -->
 <% @posts.each_with_index do |post, idx| %>
-  <div class="postsummary" id="div<%= ( @count + idx + 1 ) %>">
+  <div class="post-div" id="div<%= ( @count + idx + 1 ) %>">
   <!-- rank number logic -->
   #<%= ( @count + idx + 1 ) %>
 
@@ -13,7 +13,7 @@
 
   <!-- image logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif")  %>
-    <img src="<%= post.url %>" height="100" width="100">
+    <img class="img-rounded" src="<%= post.url %>" height="100" width="100">
   <% else %>
     <%= image_tag("no_img.gif", size: "100x100") %>
   <% end %>

@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   end
 
   def show
-    # @comment = Comment.find_by_id(params[:id])
+    @comment = Comment.find_by_id(params[:id])
     #
     # if @comment
     #   render :show
@@ -33,6 +33,13 @@ class CommentsController < ApplicationController
   def index
     @post = Post.find(params[:post_id])
     @comments = @post.comments
+  end
+
+  def destroy
+
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to post_comments_url(comment.post)
   end
 
   private

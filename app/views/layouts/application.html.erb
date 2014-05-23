@@ -9,16 +9,54 @@
 </head>
 <body>
 
-<% if current_user %>
-  <%= current_user.username %>
-  <%= link_to "Sign Out", session_url, method: :delete %>
-  <%= link_to "Make New Post", new_post_url  %>
-  <% else %>
-  want to join?
-  <%= link_to "login", new_session_url %> or
-  <%= link_to "register", new_user_url %> in seconds
-<% end %>
-<br><br>
+<div id="header" role="banner">
+  <div id="sr-header-area">
+    <div class="width-clip">
+
+    <div class="dropdown srdrop">
+      <span class="selected title">my subreddits</span>
+    </div>
+
+    <div class="sr-list">
+      <ul class="flat-list sr-bar hover">
+        <li class="selected"><%= link_to "front", root_url %> -</li>
+        <li><%= link_to "all", root_url %> -</li>
+        <li><%= link_to "random", root_url %></li>
+      </ul>|
+
+      <ul class="flat-list sr-bar hover">
+        <li><%= link_to "funny", "#" %> -</li>
+        <li><%= link_to "awww", "#" %> -</li>
+        <li><%= link_to "pics", "#" %> -</li>
+        <li><%= link_to "AskReddit", "#" %></li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div id="header-bottom-left">
+    <%= image_tag("logo.png") %>
+    <ul class="tabmenu ">
+      <li class="selected"><%= link_to "hot", "#" %></li>
+      <li><%= link_to "new", "#" %></li>
+      <li><%= link_to "rising", "#" %></li>
+    </ul>
+  </div>
+
+  <div id="header-bottom-right">
+    <% if current_user %>
+        <%= link_to current_user.username, user_url(current_user) %> |
+        <%= link_to "messages (0)", "#" %> |
+        <%= link_to "preferences", "#" %> |
+        <%= link_to "logout", session_url, method: :delete %>
+      <% else %>
+      want to join?
+      <%= link_to "login", new_session_url %> or
+      <%= link_to "register", new_user_url %> in seconds
+    <% end %>
+  </div>
+
+</div> <!-- end of header div -->
 
 <% if flash[:errors] %>
   <% flash[:errors].each do |error| %>
@@ -26,8 +64,9 @@
   <% end %>
 <% end %>
 
-
-<%= yield %>
+<div class="col-sm-1"></div>
+<div class="col-sm-10"><%= yield %></div>
+<div class="col-sm-1"></div>
 
 </body>
 </html>

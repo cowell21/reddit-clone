@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
   resources :posts do
-    resources :comments, only: [:create, :new, :show, :index]
+    resources :comments, only: [:create, :new, :show, :index, :destroy]
     member do
       post "upvote"
       post "downvote"

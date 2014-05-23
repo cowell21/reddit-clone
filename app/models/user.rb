@@ -2,12 +2,13 @@ class User < ActiveRecord::Base
   attr_reader :password
   #before_validation :ensure_session_token
 
-  validates :username, presence: true
+  validates :username, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, :allow_nil => true }
   validates :password_digest, presence: true
 
   has_many :posts, inverse_of: :user
   has_many :votes, inverse_of: :user
+  has_many :comments, inverse_of: :user
 
 
   def self.find_by_credentials(username, password)
