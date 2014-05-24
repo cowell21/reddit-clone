@@ -63,16 +63,69 @@
 <div class="col-sm-1"></div>
 <div class="col-sm-8">
 
-  <% if flash[:errors] %>
-    <% flash[:errors].each do |error| %>
-      <%= error %>
+
+    <% if flash[:errors] %>
+      <div class="alert alert-warning">
+      <% flash[:errors].each do |error| %>
+        <%= error %>
+      <% end %>
+      </div>
     <% end %>
-  <% end %>
 
   <%= yield %>
 </div>
 <div class="col-sm-3">
 
+
+  <div class="side">
+
+  <div class="spacer">
+    <form action="" id="search" role="search">
+    <input type="text" name="query" placeholder="search reddit">
+    <%= button_to "Search","#"%>
+    </form>
+  </div>
+
+  <% unless current_user %>
+    <form method="post" action="<%= session_url %>" id="login_login-main" class="jumbotron">
+    <input type="hidden" name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+    <label>Username
+    <input name="user[username]" placeholder="username" type="text" maxlength="20" tabindex="1"></label>
+
+    <label>Password
+    <input name="user[password]" placeholder="password" type="password" tabindex="1">
+    </label>
+
+    <label>
+    <input type="checkbox">remember me
+    </label>
+
+    <a href="#">reset password</a>
+
+    <div class="submit">
+
+    <span class="throbber">
+    </span><button class="" type="submit" tabindex="1">login</button>
+    </div>
+
+    <div class="clear">
+    </div>
+    </form>
+  <% end %>
+
+
+
+  <div class="morelink">
+    <a href="#" class="login-required" target="_top">Submit a new link</a>
+  </div>
+  <br>
+  <div class="morelink">
+    <a href="#" class="login-required" target="_top">Submit a new text post</a>
+  </div>
+
+  </div>
 
 </div>
 

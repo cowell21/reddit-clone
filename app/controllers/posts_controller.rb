@@ -36,9 +36,8 @@ class PostsController < ApplicationController
 
   end
 
-  def search
-
-  end
+  # def search
+  # end
 
   def show
     @post = Post.find(params[:id])
@@ -98,6 +97,10 @@ class PostsController < ApplicationController
     else
       @post.votes.create(user_id: current_user.id, value: direction)
     end
+  end
+
+  def search
+
   end
 
 end
