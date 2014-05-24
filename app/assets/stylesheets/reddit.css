@@ -5037,7 +5037,7 @@
 	margin-right:5px;
 	margin-bottom:2px;
 	overflow:hidden;
-	width:70px
+	width:100px
 }
 .thumbnail.nsfw
 {
@@ -5268,7 +5268,7 @@
 .dropdown.srdrop .selected
 {
 	background:none no-repeat scroll center right;
-	background-image:url(../droparrowgray.gif);
+	/*background-image:url(../droparrowgray.gif);*/
 	display:inline-block;
 	vertical-align:bottom;
 	padding-right:21px;

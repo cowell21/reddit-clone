@@ -16,7 +16,8 @@ Post.create( title: "pizza fries", url: "http://i.imgur.com/5ywsGIw.jpg", user_i
 Post.create( title: "kangaroo", url: "http://i.imgur.com/cQ5E4ID.jpg", user_id: 2)
 Post.create( title: "ESPN", url: "http://www.espn.com", body: "Sport News Website", user_id: 2)
 Post.create( title: "google", url: "http://www.google.com", body: "search engine", user_id: 2)
-Post.create( title: "reddit", url: "reddit", body: "A fun site", user_id: 2)
+Post.create( title: "reddit", url: "http://www.reddit.com", body: "A fun site", user_id: 2)
+Post.create( title: "I love this clone site", body: "Hey everybody I love this site", user_id: 2)
 #Post.create( title: "", url: "", user_id: 1)
 
 Vote.create( user_id: 1, post_id: 1, value: 1)

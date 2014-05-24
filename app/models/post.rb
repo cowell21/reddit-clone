@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   validates :title, presence: true, null: false
   validates :user_id, presence: true, null: false
+  validates :url, presence: true, null: false
 
   belongs_to :user, inverse_of: :posts
 

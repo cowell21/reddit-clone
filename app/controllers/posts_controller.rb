@@ -28,11 +28,15 @@ class PostsController < ApplicationController
       if (@count + @pagesize) > @posts.length
         @posts = @posts[@count...@total]
       else
-        @posts = @posts[@count..(@count + @pagesize - 1)]
+        @posts = @posts[@count...(@count + @pagesize)]
       end
     else
       @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
     end
+
+  end
+
+  def search
 
   end
 
@@ -47,15 +51,25 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    @post = Post.find(params[:id])
-    vote(1) if current_user
-    redirect_to root_url
+    if current_user
+      @post = Post.find(params[:id])
+      vote(1) if current_user
+      redirect_to root_url
+    else
+      flash[:errors] = ["Must be logged in to vote"]
+      redirect_to new_session_url
+    end
   end
 
   def downvote
-    @post = Post.find(params[:id])
-    vote(-1) if current_user
-    redirect_to root_url
+    if current_user
+      @post = Post.find(params[:id])
+      vote(-1) if current_user
+      redirect_to root_url
+    else
+      flash[:errors] = ["Must be logged in to vote"]
+      redirect_to new_session_url
+    end
   end
 
   def destroy
@@ -76,6 +90,7 @@ class PostsController < ApplicationController
   end
 
   def vote(direction)
+
     @vote = Vote.find_by_post_id_and_user_id(@post.id, current_user.id)
 
     if @vote

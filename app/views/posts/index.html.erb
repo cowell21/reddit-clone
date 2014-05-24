@@ -1,53 +1,86 @@
 <h3>Post Index</h3>
 
-<!-- todo: sort by votes -->
 <% @posts.each_with_index do |post, idx| %>
-  <div class="post-div" id="div<%= ( @count + idx + 1 ) %>">
-  <!-- rank number logic -->
-  #<%= ( @count + idx + 1 ) %>
 
-  <!-- net upvote/downvote display -->
-  <%= button_to "Upvote", upvote_post_url(action: :upvote, id: post.id) %>
-  <%= post.votes.sum(:value) %>
-  <%= button_to "Downvote", downvote_post_url(action: :downvote, id: post.id) %>
 
-  <!-- image logic -->
+  <div class=" thing odd link " id="post-<%= post.id %>">
+
+  <span class="rank"><%= ( @count + idx + 1 ) %></span>
+
+  <div class="midcol unvoted"><!-- voting div -->
+    <!-- upvote button -->
+    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id) %>
+    <div class="score unvoted"><%= post.votes.sum(:value) %></div>
+    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id) %>
+    <!-- downvote button -->
+  </div>
+
   <% if post.url.include?(".jpg") || post.url.include?(".gif")  %>
-    <img class="img-rounded" src="<%= post.url %>" height="100" width="100">
-  <% else %>
-    <%= image_tag("no_img.gif", size: "100x100") %>
-  <% end %>
+      <a class="thumbnail may-blank loggedin" href="<%= post.url %>">
+      <%= image_tag( post.url ) %>
+    <% else %>
+      <a class="thumbnail may-blank loggedin" href="#">
+      <%= image_tag("no_img.gif") %>
+    <% end %>
+  </a>
 
-  <!-- link logic -->
-  <% if post.url != "" %>
-    <%= link_to post.title, post.url %>
-    (<%= post.url.split('/')[2] %>)
-  <% else %>
-      <%= link_to post.title, post_url(post) %>
-  <% end %>
-  <br>
+  <div class="entry unvoted">
+    <p class="title">
+    <% if post.url != "" %>
+    <%= link_to post.title, post.url, class: "title may-blank loggedin"%>
+    <% else %>
+    <%= link_to post.title, post_url(post), class: "title may-blank loggedin"%>
+    <% end %>
 
-  <!-- time logic -->
-  <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
-  <%= " Submited #{hours} hours ago by " %>
+    <span class="domain">
+      (<%= post.url != "" ? post.url.split('/')[2] : "self" %>)
+    </span></p>
 
-  <!-- owner logic -->
-  <%= link_to post.user.username, user_url(post.user) %>
+    <p class="tagline">submitted <time class="live-timestamp">
+      <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
+      <%= " #{hours} hours ago by" %></time>
+      <a href="#" class="author may-blank">
+        <%= link_to post.user.username, user_url(post.user) %></a>
 
-  <!-- Comments Link -->
-  <%= link_to " #{post.comments.length} Comments ", post_comments_url(post)  %>
+    <span class="userattrs">
+    </span> to <a href="#" class="subreddit hover may-blank">/r/sub</a></p>
 
-  <!-- hide jquery logic -->
-  <%= javascript_tag "  $(document).ready(function(){
-    $('#link#{( @count + idx + 1 )}').click(function(){
-      $('#div#{( @count + idx + 1 )}').fadeOut('slow');
-    });
-  });" %>
-  <!-- jquery link to fadeout -->
-  <a href="#" id="link<%=( @count + idx + 1 )%>">hide</a>
+    <ul class="flat-list buttons">
+    <li class="first">
+
+      <%= link_to " #{post.comments.length} comments ",
+       post_comments_url(post),  class: "comments may-blank"  %>
+    </li>
+
+    <li class="share">
+      <a href="#">share</a>
+    </li>
+
+    <li class="link-save-button save-button">
+      <a href="#">save</a>
+    </li>
+
+    <li><!-- jquery hide -->
+      <%= javascript_tag "  $(document).ready(function(){
+        $('#link-#{ post.id }').click(function(){
+          $('#post-#{post.id}').fadeOut('slow');
+        });
+      });" %>
+      <!-- jquery link to fadeout -->
+      <a href="#" class="state-button hide-button" id="link-<%= post.id %>">
+      hide</a>
+    </li>
+
+    <li>
+      <a href="#" class="toggle report-button ">report</a>
+    </li>
+    </ul>
+  </div>
+
+  <div class="clearleft"></div>
 
   </div>
-  <br>
+
 <% end %>
 
 <!-- Next & Prev link pagation logic -->
