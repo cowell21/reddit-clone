@@ -58,11 +58,8 @@
 
 </div> <!-- end of header div -->
 
-
-
 <div class="col-sm-1"></div>
 <div class="col-sm-8">
-
 
     <% if flash[:errors] %>
       <div class="alert alert-warning">
@@ -72,15 +69,14 @@
       </div>
     <% end %>
 
-  <%= yield %>
+  <%= yield %><!-- magic happens here -->
 
 </div>
 <div class="col-sm-3">
-
   <div class="side">
 
   <form action="<%= root_url %>" id="search">
-  <input type="text" name="query" placeholder="search reddit">
+    <input type="text" name="query" placeholder="search reddit">
   </form>
   <br>
 
@@ -102,8 +98,8 @@
   <%= link_to "Submit a new link", new_post_url, class: "morelink" %>
   <br>
   <%= link_to "Submit a new text post", new_post_url, class: "morelink" %>
-  </div>
 
+  </div>
 </div>
 
 </body>
