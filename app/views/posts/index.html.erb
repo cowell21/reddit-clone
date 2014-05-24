@@ -2,7 +2,7 @@
 
 <% @posts.each_with_index do |post, idx| %>
 
-  <div class="link" id="post-<%= post.id %>">
+<div class="link" id="post-<%= post.id %>">
 
   <!-- rank -->
   <span class="rank"><%= ( @count + idx + 1 ) %></span>
@@ -16,20 +16,19 @@
 
   <!-- img logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
-      <a class="thumbnail" href="<%= post.url %>">
-      <%= image_tag(post.url) %></a>
-    <% else %>
-      <a class="thumbnail" href="<%= post_comments_url(post) %>">
-      <%= image_tag("no_img.gif") %></a>
+    <%= link_to image_tag(post.url), post.url, class: "thumbnail" %>
+  <% else %>
+    <%= link_to image_tag("no_img.gif"),
+     post_comments_url(post), class: "thumbnail" %>
   <% end %>
 
   <!-- vote logic -->
   <div class="entry">
     <p class="title">
     <% if post.url != "" %>
-    <%= link_to post.title, post.url, class: "title may-blank loggedin"%>
+      <%= link_to post.title, post.url %>
     <% else %>
-    <%= link_to post.title, post_url(post), class: "title may-blank loggedin"%>
+      <%= link_to post.title, post_url(post) %>
     <% end %>
 
     <span class="domain">
@@ -45,10 +44,10 @@
       to <a href="#">/r/sub</a><!-- I don't have subs yet -->
     </p>
 
-    <ul class="flat-list buttons">
+    <ul class="buttons">
     <li>
       <%= link_to " #{post.comments.length} comments ",
-       post_comments_url(post), class: "comments may-blank"  %>
+       post_comments_url(post) %>
     </li>
 
     <li><%= link_to "share", "#" %></li>
@@ -79,7 +78,7 @@
 
   <div class="clearleft"></div>
 
-  </div>
+</div>
 
 <% end %>
 
