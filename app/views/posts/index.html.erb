@@ -62,17 +62,23 @@
 
     <li><!-- jquery hide -->
       <%= javascript_tag "  $(document).ready(function(){
-        $('#link-#{ post.id }').click(function(){
+        $('#link-hide-#{ post.id }').click(function(){
           $('#post-#{post.id}').fadeOut('slow');
         });
       });" %>
       <!-- jquery link to fadeout -->
-      <a href="#" class="state-button hide-button" id="link-<%= post.id %>">
+      <a href="#" class="state-button hide-button" id="link-hide-<%= post.id %>">
       hide</a>
     </li>
 
     <li>
-      <a href="#" class="toggle report-button ">report</a>
+      <%= javascript_tag "  $(document).ready(function(){
+        $('#link-report-#{ post.id }').click(function(){
+          alert('Post has been report to Admins');
+        });
+      });" %>
+      <a href="#" class="toggle report-button"
+       id="link-report-<%= post.id %>">report</a>
     </li>
     </ul>
   </div>
