@@ -79,35 +79,23 @@
 
   <div class="side">
 
-  <div class="spacer">
-    <form action="<%= root_url %>" id="search" role="search">
-    <input type="text" name="query" placeholder="search reddit">
-    </form>
-  </div>
+  <form action="<%= root_url %>" id="search">
+  <input type="text" name="query" placeholder="search reddit">
+  </form>
+  <br>
 
   <% unless current_user %>
     <form method="post" action="<%= session_url %>"  class="jumbotron">
-    <input type="hidden" name="authenticity_token"
-    value="<%= form_authenticity_token %>">
+      <input type="hidden" name="authenticity_token"
+      value="<%= form_authenticity_token %>">
 
-    <label>Username
-    <input name="user[username]" placeholder="username" type="text" maxlength="20" tabindex="1"></label>
+      <input name="user[username]" placeholder="username" type="text">
+      <input name="user[password]" placeholder="password" type="password">
 
-    <label>Password
-    <input name="user[password]" placeholder="password" type="password" tabindex="1">
-    </label>
-
-    <label><input type="checkbox">remember me</label>
-
-    <a href="#">reset password</a>
+      <label><input type="checkbox">remember me</label>
+      <a href="#">reset password</a>
 
       <button>login</button>
-      <%= button_to "login", class: "btn "%>
-
-    <div class="submit">
-
-    </div>
-
     </form>
   <% end %>
 
