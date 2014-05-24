@@ -1,0 +1,14 @@
+require 'open-uri'
+#require 'json'
+
+arr = []
+data = open('http://www.reddit.com/r/aww/').readlines.each do |line|
+  if line.include?('http://imgur.com/')
+    str = "http://imgur.com/" + line.split("http://imgur.com/")[1] + ".jpg"
+    puts str
+  end
+end
+
+
+#puts arr
+

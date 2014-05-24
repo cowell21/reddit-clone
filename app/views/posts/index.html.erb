@@ -2,29 +2,29 @@
 
 <% @posts.each_with_index do |post, idx| %>
 
+  <div class="link" id="post-<%= post.id %>">
 
-  <div class=" thing odd link " id="post-<%= post.id %>">
-
+  <!-- rank -->
   <span class="rank"><%= ( @count + idx + 1 ) %></span>
 
-  <div class="midcol unvoted"><!-- voting div -->
-    <!-- upvote button -->
+  <!-- voting -->
+  <div class="midcol">
     <%= button_to "+", upvote_post_url(action: :upvote, id: post.id) %>
-    <div class="score unvoted"><%= post.votes.sum(:value) %></div>
+    <div class="score"><%= post.votes.sum(:value) %></div>
     <%= button_to "-", downvote_post_url(action: :downvote, id: post.id) %>
-    <!-- downvote button -->
   </div>
 
-  <% if post.url.include?(".jpg") || post.url.include?(".gif")  %>
-      <a class="thumbnail may-blank loggedin" href="<%= post.url %>">
-      <%= image_tag( post.url ) %>
+  <!-- img logic -->
+  <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
+      <a class="thumbnail" href="<%= post.url %>">
+      <%= image_tag(post.url) %></a>
     <% else %>
-      <a class="thumbnail may-blank loggedin" href="#">
-      <%= image_tag("no_img.gif") %>
-    <% end %>
-  </a>
+      <a class="thumbnail" href="<%= post_comments_url(post) %>">
+      <%= image_tag("no_img.gif") %></a>
+  <% end %>
 
-  <div class="entry unvoted">
+  <!-- vote logic -->
+  <div class="entry">
     <p class="title">
     <% if post.url != "" %>
     <%= link_to post.title, post.url, class: "title may-blank loggedin"%>
@@ -34,54 +34,48 @@
 
     <span class="domain">
       (<%= post.url != "" ? post.url.split('/')[2] : "self" %>)
-    </span></p>
+    </span>
+    </p>
 
-    <p class="tagline">submitted <time class="live-timestamp">
+    <!-- time logic -->
+    <p class="tagline">submitted
       <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
-      <%= " #{hours} hours ago by" %></time>
-      <a href="#" class="author may-blank">
-        <%= link_to post.user.username, user_url(post.user) %></a>
-
-    <span class="userattrs">
-    </span> to <a href="#" class="subreddit hover may-blank">/r/sub</a></p>
+      <%= " #{hours} hours ago by" %>
+      <%= link_to post.user.username, user_url(post.user) %>
+      to <a href="#">/r/sub</a><!-- I don't have subs yet -->
+    </p>
 
     <ul class="flat-list buttons">
-    <li class="first">
-
+    <li>
       <%= link_to " #{post.comments.length} comments ",
-       post_comments_url(post),  class: "comments may-blank"  %>
+       post_comments_url(post), class: "comments may-blank"  %>
     </li>
 
-    <li class="share">
-      <a href="#">share</a>
-    </li>
+    <li><%= link_to "share", "#" %></li>
 
-    <li class="link-save-button save-button">
-      <a href="#">save</a>
-    </li>
+    <li><%= link_to "save", "#" %></li>
 
-    <li><!-- jquery hide -->
+    <li>
+      <!-- jquery hide -->
       <%= javascript_tag "  $(document).ready(function(){
         $('#link-hide-#{ post.id }').click(function(){
           $('#post-#{post.id}').fadeOut('slow');
         });
-      });" %>
-      <!-- jquery link to fadeout -->
-      <a href="#" class="state-button hide-button" id="link-hide-<%= post.id %>">
-      hide</a>
+      });" %><!-- jquery hide end -->
+      <a href="#" id="link-hide-<%= post.id %>">hide</a>
     </li>
 
     <li>
+      <!-- jquery report | just a alert -->
       <%= javascript_tag "  $(document).ready(function(){
         $('#link-report-#{ post.id }').click(function(){
-          alert('Post has been report to Admins');
+          alert('#{post.title} post has been report to Admins');
         });
-      });" %>
-      <a href="#" class="toggle report-button"
-       id="link-report-<%= post.id %>">report</a>
+      });" %><!-- end of jquery report -->
+      <a href="#" id="link-report-<%= post.id %>">report</a>
     </li>
     </ul>
-  </div>
+  </div><!-- end of div class entry -->
 
   <div class="clearleft"></div>
 
