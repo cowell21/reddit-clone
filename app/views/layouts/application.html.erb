@@ -73,6 +73,7 @@
     <% end %>
 
   <%= yield %>
+
 </div>
 <div class="col-sm-3">
 
@@ -80,9 +81,8 @@
   <div class="side">
 
   <div class="spacer">
-    <form action="" id="search" role="search">
+    <form action="<%= root_url %>" id="search" role="search">
     <input type="text" name="query" placeholder="search reddit">
-    <%= button_to "Search","#"%>
     </form>
   </div>
 

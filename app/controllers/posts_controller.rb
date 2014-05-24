@@ -18,7 +18,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.sort_by(&:sum_votes).reverse
+    @posts = Post.all
+    @posts = query(@posts) if params[:query]
+    @posts = @posts.sort_by(&:sum_votes).reverse
     params[:count] ? @count = params[:count].to_i : @count = 0
     @total = @posts.length
     @pagesize = 5 # change index page size here
@@ -39,14 +41,14 @@ class PostsController < ApplicationController
   # def search
   # end
 
+  # def edit
+  # end
+
+  # def update
+  # end
+
   def show
     @post = Post.find(params[:id])
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def upvote
@@ -99,8 +101,12 @@ class PostsController < ApplicationController
     end
   end
 
-  def search
-
+  def query(posts)
+    arr = []
+    posts.each do |post|
+      arr.push(post) if post.title.downcase.include?(params[:query].downcase)
+    end
+    arr
   end
 
 end
