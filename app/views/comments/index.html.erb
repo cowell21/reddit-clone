@@ -14,7 +14,7 @@
   <div class="spacer">
     sorted by:
     <div class="dropdown lightdrop ">
-    <span class="selected">best</span>
+    <span class="selected">oldest</span>
     </div>
   </div>
 
@@ -37,67 +37,15 @@
 
 <!-- Nested Comments -->
 <div class="sitetable nestedlisting">
-
-
-
-
   <% comments_by_parent = @post.comments_by_parent %>
 
   <% comments_by_parent[nil].each do |top_level_comments| %>
-    <li><%= comment_partial(top_level_comments, comments_by_parent) %></li>
-  <% end %>
 
-
-<div class="comment">
-  <div class="entry">
-    <div>
-      <p class="tagline">
-      <%= link_to "[-]", "#", class: "expand" %>
-      <%= link_to "Authornamehere", "userurl", class: "author" %>
-      <%= "insert time here"%>
-      </p>
-
-      <div class="usertext-body usertext">
-        <div class="md">
-        <p><%= "insert comment body here" %></p>
-        </div>
-      </div>
-
-      <ul class="flat-list buttons">
-        <li><a href="#">permalink</a></li>
-        <li><a href="#">save</a></li>
-        <li><a href="#">report</a></li>
-        <% if current_user %><li><a href="">reply</a></li><% end %>
-      </ul>
+    <div class="comment">
+       <%= comment_partial(top_level_comments, comments_by_parent) %>
     </div>
-  </div>
-  <!-- child div -->
-  <div class="child">
 
-  </div><!-- child div end -->
-</div><!-- end of comment div -->
-
-
-
-
-
+  <% end %>
 </div><!-- nestedlisting div end -->
 
 </div><!-- end of commentarea div -->
-
-
-
-<h4>------------------------------</h4>
-
-<%= link_to "New Comment", new_post_comment_url %>
-<br><br>
-
-<!-- recursive comments -->
-<ul>
-  <% comments_by_parent = @post.comments_by_parent %>
-
-  <% comments_by_parent[nil].each do |top_level_comments| %>
-    <li><%= comment_partial(top_level_comments, comments_by_parent) %></li>
-  <% end %>
-</ul>
-<!-- end of recursive comments -->

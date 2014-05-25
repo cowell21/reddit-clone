@@ -1,33 +1,35 @@
-<!-- recursive commment template -->
-<div class="comment-div" id="div-comment-<%=comment.id%>" >
-  <%= link_to comment.user.username, user_url(comment.user) %>
-  <%=  %>
+  <div class="entry">
+    <div>
+      <p class="tagline">
+      <%= link_to "[-]", "#", class: "expand" %>
+      <%= link_to comment.user.username, "#userurl", class: "author" %>
+      <%= time_ago(comment.created_at) %>
+      </p>
 
-  <%= time_ago(comment.created_at) %>
-  <br>
-  <%= "#{comment.body} " %><br>
-  <%= link_to "reply",
-   new_post_comment_url( parent_id: comment.id ) %>
+      <div class="usertext-body usertext">
+        <div class="md">
+        <p><%= comment.body %></p>
+        </div>
+      </div>
 
-  <!-- hide jquery logic -->
-  <%= javascript_tag "  $(document).ready(function(){
-    $('#comment-#{comment.id}-hide').click(function(){
-      $('#div-comment-#{comment.id}').fadeOut('slow');
-    });
-  });" %>
-  <a href="#" id="comment-<%= comment.id %>-hide">hide</a>
+      <ul class="flat-list buttons">
+        <li><a href="#">permalink</a></li>
+        <li><a href="#">save</a></li>
+        <li><a href="#">report</a></li>
 
-  <%= link_to "report", '#' %>
+        <% if current_user %>
+        <li>
+          <%= link_to "reply",
+           new_post_comment_url( parent_id: comment.id ) %>
+        </li>
+        <% end %>
 
-  <!-- delete logic if owner -->
-  <% if current_user == comment.user %>
-    <%= link_to "delete", post_comment_url(id: comment.id), method: :delete %>
-  <% end %>
-</div>
-<br>
-
-<ul>
-  <% comments_by_parent[comment.id].each do |child_comment| %>
-    <li><%= comment_partial(child_comment, comments_by_parent) %></li>
-  <% end %>
-</ul>
+      </ul>
+    </div>
+  </div>
+  <!-- child div -->
+  <div class="child">
+    <% comments_by_parent[comment.id].each do |child_comment| %>
+      <%= comment_partial(child_comment, comments_by_parent) %>
+    <% end %>
+  </div><!-- child div end -->
