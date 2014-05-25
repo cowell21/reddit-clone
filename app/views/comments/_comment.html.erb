@@ -1,35 +1,59 @@
-  <div class="entry">
-    <div>
-      <p class="tagline">
-      <%= link_to "[-]", "#", class: "expand" %>
-      <%= link_to comment.user.username, "#userurl", class: "author" %>
-      <%= time_ago(comment.created_at) %>
-      </p>
+<div class="entry">
+  <div>
+    <p class="tagline">
+    <%= link_to "[-]", "#", class: "expand" %>
+    <%= link_to comment.user.username, "#userurl", class: "author" %>
+    <%= time_ago(comment.created_at) %>
+    </p>
 
-      <div class="usertext-body usertext">
-        <div class="md">
-        <p><%= comment.body %></p>
-        </div>
+    <div class="usertext-body usertext">
+      <div class="md">
+      <p><%= comment.body %></p>
       </div>
-
-      <ul class="flat-list buttons">
-        <li><a href="#">permalink</a></li>
-        <li><a href="#">save</a></li>
-        <li><a href="#">report</a></li>
-
-        <% if current_user %>
-        <li>
-          <%= link_to "reply",
-           new_post_comment_url( parent_id: comment.id ) %>
-        </li>
-        <% end %>
-
-      </ul>
     </div>
+
+    <ul class="flat-list buttons">
+      <li><a href="#">permalink</a></li>
+      <li><a href="#">save</a></li>
+      <li><a href="#">report</a></li>
+
+      <% if current_user %>
+      <li>
+        <%= link_to "reply", "#" + comment.id.to_s + "-reply-form",
+         id: "comment-" + comment.id.to_s + "-reply" %>
+        <!-- jquery reply -->
+        <%= javascript_tag "  $(document).ready(function(){
+          $('#comment-#{comment.id.to_s}-reply').click(function(){
+            $('##{comment.id}-reply-form').css({'display': 'block'});
+          });
+        });" %><!-- jquery reply end -->
+
+      </li>
+      <% end %>
+
+    </ul>
   </div>
-  <!-- child div -->
-  <div class="child">
-    <% comments_by_parent[comment.id].each do |child_comment| %>
-      <%= comment_partial(child_comment, comments_by_parent) %>
-    <% end %>
-  </div><!-- child div end -->
+</div>
+<!-- child div -->
+<div class="child">
+
+  <form id="<%= comment.id %>-reply-form" action="<%= post_comments_url %>"
+     method="post" class="usertext cloneable" style="display: none;">
+    <div class="usertext-edit">
+      <input type="hidden" name="authenticity_token"
+      value="<%= form_authenticity_token %>">
+
+      <input type="hidden" name="comment[parent_id]"
+      value="<%= comment.id %>">
+
+      <textarea name="comment[body]"> </textarea>
+
+      <button type="submit">save</button>
+      <button type="cancel">cancel</button>
+    </div>
+  </form>
+
+  <% comments_by_parent[comment.id].each do |child_comment| %>
+    <%= comment_partial(child_comment, comments_by_parent) %>
+  <% end %>
+</div><!-- child div end -->
