@@ -1,44 +1,15 @@
-<h1>Post Show</h1>
+<br><br>
 
-<h1><%= @post.title %></h1>
+<!-- Post Display -->
+<%= render "static_pages/post", post: @post, idx: 0 %>
 
-  <!-- net upvote/downvote -->
-  <%= button_to "Upvote", upvote_post_url(action: :upvote, id: @post.id) %>
-  <%= @post.votes.sum(:value) %>
-  <%= button_to "Downvote", downvote_post_url(action: :downvote, id: @post.id) %>
+<h4>Body: </h4><%= @post.body %>
 
-  <!-- image logic -->
-  <% if @post.url.include?(".jpg") || @post.url.include?(".gif")  %>
-    <img src="<%= @post.url %>" height="100" width="100">
-  <% else %>
-    <%= image_tag("no_img.gif", size: "100x100") %>
-  <% end %>
-
-  <!-- link logic -->
-  <% if @post.url != "" %>
-    <%= link_to @post.title, @post.url %>
-    (<%= @post.url.split('/')[2] %>)
-  <% else %>
-      <%= link_to @post.title, post_url(post) %>
-  <% end %>
-
-  <!-- time logic -->
-  <% hours = (Time.now.to_i - @post.created_at.to_i) / 3600 %>
-  <%= " Submited #{hours} hours ago by " %>
-
-  <!-- owner logic -->
-  <%= link_to @post.user.username, user_url(@post.user) %>
-
-<br>
-<!-- end of post display -->
-
-<h3>Body: </h3><%= @post.body %>
-
-<h3>Comments: </h3>
+<div class="commentarea">
+<h4>top <%= @post.comments.length %> comments</h4>
 
 <%= link_to "New Comment", new_post_comment_url %>
 <br><br>
-
 <!-- recursive comments -->
 <ul>
   <% comments_by_parent = @post.comments_by_parent %>
@@ -48,3 +19,4 @@
     </li>
   <% end %>
 </ul>
+</div>

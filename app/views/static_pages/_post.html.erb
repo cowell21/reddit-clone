@@ -1,0 +1,79 @@
+<div class="link" id="post-<%= post.id %>">
+
+  <!-- rank -->
+  <span class="rank">
+    <%= ( @count + idx + 1 ) if @count %>
+  </span>
+
+  <!-- voting -->
+  <div class="midcol">
+    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id) %>
+    <div class="score"><%= post.votes.sum(:value) %></div>
+    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id) %>
+  </div>
+
+  <!-- img logic -->
+  <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
+    <%= link_to image_tag(post.url), post.url, class: "thumbnail" %>
+  <% else %>
+    <%= link_to image_tag("no_img.gif"),
+     post_comments_url(post), class: "thumbnail" %>
+  <% end %>
+
+  <!-- vote logic -->
+  <div class="entry">
+    <p class="title">
+    <% if post.url != "" %>
+      <%= link_to post.title, post.url %>
+    <% else %>
+      <%= link_to post.title, post_url(post) %>
+    <% end %>
+
+    <span class="domain">
+      (<%= post.url != "" ? post.url.split('/')[2] : "self" %>)
+    </span>
+    </p>
+
+    <!-- time logic -->
+    <p class="tagline">submitted
+      <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
+      <%= " #{hours} hours ago by" %>
+      <%= link_to post.user.username, user_url(post.user) %>
+      to <a href="#">/r/sub</a><!-- I don't have subs yet -->
+    </p>
+
+    <ul class="buttons">
+    <li>
+      <%= link_to " #{post.comments.length} comments ",
+       post_comments_url(post) %>
+    </li>
+
+    <li><%= link_to "share", "#" %></li>
+
+    <li><%= link_to "save", "#" %></li>
+
+    <li>
+      <!-- jquery hide -->
+      <%= javascript_tag "  $(document).ready(function(){
+        $('#link-hide-#{ post.id }').click(function(){
+          $('#post-#{post.id}').fadeOut('slow');
+        });
+      });" %><!-- jquery hide end -->
+      <a href="#" id="link-hide-<%= post.id %>">hide</a>
+    </li>
+
+    <li>
+      <!-- jquery report | just a alert -->
+      <%= javascript_tag "  $(document).ready(function(){
+        $('#link-report-#{ post.id }').click(function(){
+          alert('#{post.title} post has been report to Admins');
+        });
+      });" %><!-- end of jquery report -->
+      <a href="#" id="link-report-<%= post.id %>">report</a>
+    </li>
+    </ul>
+  </div><!-- end of div class entry -->
+
+  <div class="clearleft"></div>
+
+</div>
