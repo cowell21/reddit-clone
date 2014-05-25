@@ -34,7 +34,7 @@
     </span>
     </p>
 
-    <!-- time logic -->
+    <!-- time/owner logic -->
     <p class="tagline">submitted
       <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
       <%= " #{hours} hours ago by" %>
@@ -42,6 +42,16 @@
       to <a href="#">/r/sub</a><!-- I don't have subs yet -->
     </p>
 
+    <!-- body logic -->
+    <% if post.body && request.original_url.include?("comments") %>
+    <div class="usertext usertext-body md">
+      <div class="md">
+        <p><%= post.body %></p>
+      </div>
+    </div>
+    <% end %>
+
+    <!-- buttons logic -->
     <ul class="buttons">
     <li>
       <%= link_to " #{post.comments.length} comments ",
@@ -63,7 +73,7 @@
     </li>
 
     <li>
-      <!-- jquery report | just a alert -->
+      <!-- jquery report -->
       <%= javascript_tag "  $(document).ready(function(){
         $('#link-report-#{ post.id }').click(function(){
           alert('#{post.title} post has been report to Admins');

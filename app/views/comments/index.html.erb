@@ -1,22 +1,23 @@
 <br><br>
 
-<!-- Post Display -->
 <%= render "static_pages/post", post: @post, idx: 0 %>
 
-<h4>Body: </h4><%= @post.body %>
-
+<!-- Comment Area -->
 <div class="commentarea">
+
 <h4>top <%= @post.comments.length %> comments</h4>
 
 <%= link_to "New Comment", new_post_comment_url %>
 <br><br>
+
 <!-- recursive comments -->
 <ul>
   <% comments_by_parent = @post.comments_by_parent %>
+
   <% comments_by_parent[nil].each do |top_level_comments| %>
-    <li>
-      <%= comment_partial(top_level_comments, comments_by_parent) %>
-    </li>
+    <li><%= comment_partial(top_level_comments, comments_by_parent) %></li>
   <% end %>
 </ul>
+<!-- end of recursive comments -->
+
 </div>
