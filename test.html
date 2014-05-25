@@ -1,0 +1,14 @@
+<h4>------------------------------</h4>
+
+<%= link_to "New Comment", new_post_comment_url %>
+<br><br>
+
+<!-- recursive comments -->
+<ul>
+  <% comments_by_parent = @post.comments_by_parent %>
+
+  <% comments_by_parent[nil].each do |top_level_comments| %>
+    <li><%= comment_partial(top_level_comments, comments_by_parent) %></li>
+  <% end %>
+</ul>
+<!-- end of recursive comments -->

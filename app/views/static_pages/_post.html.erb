@@ -36,8 +36,7 @@
 
     <!-- time/owner logic -->
     <p class="tagline">submitted
-      <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
-      <%= " #{hours} hours ago by" %>
+      <%= time_ago( post.created_at ) %> by
       <%= link_to post.user.username, user_url(post.user) %>
       to <a href="#">/r/sub</a><!-- I don't have subs yet -->
     </p>

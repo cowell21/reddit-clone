@@ -6,7 +6,7 @@
 <div class="commentarea">
 
 <div class="panestack-title">
-<span class="title">all 3 comments</span>
+<span class="title">all <%= @post.comments.length %> comments</span>
 </div>
 
 <!-- comment menu -->
@@ -21,16 +21,32 @@
   <div class="spacer"></div>
 </div>
 
-<!-- new comment form -->
-<form class="usertext cloneable">
+<!-- new parent comment form -->
+<% if current_user %>
+<form action="<%= post_comments_url %>" method="post"
+  class="usertext cloneable">
   <div class="usertext-edit">
-    <textarea> </textarea>
+    <input type="hidden" name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+    <textarea name="comment[body]"> </textarea>
     <button type="submit">save</button>
   </div>
 </form>
+<% end %>
 
 <!-- Nested Comments -->
 <div class="sitetable nestedlisting">
+
+
+
+
+  <% comments_by_parent = @post.comments_by_parent %>
+
+  <% comments_by_parent[nil].each do |top_level_comments| %>
+    <li><%= comment_partial(top_level_comments, comments_by_parent) %></li>
+  <% end %>
+
 
 <div class="comment">
   <div class="entry">
@@ -51,7 +67,7 @@
         <li><a href="#">permalink</a></li>
         <li><a href="#">save</a></li>
         <li><a href="#">report</a></li>
-        <li><a href="">reply</a></li>
+        <% if current_user %><li><a href="">reply</a></li><% end %>
       </ul>
     </div>
   </div>
@@ -60,6 +76,10 @@
 
   </div><!-- child div end -->
 </div><!-- end of comment div -->
+
+
+
+
 
 </div><!-- nestedlisting div end -->
 

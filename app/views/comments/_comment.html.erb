@@ -2,19 +2,19 @@
 <div class="comment-div" id="div-comment-<%=comment.id%>" >
   <%= link_to comment.user.username, user_url(comment.user) %>
   <%=  %>
-  <% hours = (Time.now.to_i - comment.created_at.to_i) / 3600 %>
-  <%= " #{hours} hours ago" %>
+
+  <%= time_ago(comment.created_at) %>
   <br>
   <%= "#{comment.body} " %><br>
   <%= link_to "reply",
    new_post_comment_url( parent_id: comment.id ) %>
+
   <!-- hide jquery logic -->
   <%= javascript_tag "  $(document).ready(function(){
     $('#comment-#{comment.id}-hide').click(function(){
       $('#div-comment-#{comment.id}').fadeOut('slow');
     });
   });" %>
-  <!-- jquery link to fadeout -->
   <a href="#" id="comment-<%= comment.id %>-hide">hide</a>
 
   <%= link_to "report", '#' %>
