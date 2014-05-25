@@ -3007,8 +3007,7 @@
 }
 .footer-parent
 {
-	font-size:larger;
-	padding-top:40px;
+	padding-top:20px;
 	clear:both;
 	text-align:center
 }
@@ -3026,7 +3025,6 @@
 	margin:10px 0;
 	padding:0 15px;
 	border-left:1px solid #E0E0E0;
-	height:9.5em
 }
 .footer .col:first-child
 {
