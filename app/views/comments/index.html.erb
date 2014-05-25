@@ -5,7 +5,69 @@
 <!-- Comment Area -->
 <div class="commentarea">
 
-<h4>top <%= @post.comments.length %> comments</h4>
+<div class="panestack-title">
+<span class="title">all 3 comments</span>
+</div>
+
+<!-- comment menu -->
+<div class="menuarea">
+  <div class="spacer">
+    sorted by:
+    <div class="dropdown lightdrop ">
+    <span class="selected">best</span>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+</div>
+
+<!-- new comment form -->
+<form class="usertext cloneable">
+  <div class="usertext-edit">
+    <textarea> </textarea>
+    <button type="submit">save</button>
+  </div>
+</form>
+
+<!-- Nested Comments -->
+<div class="sitetable nestedlisting">
+
+<div class="comment">
+  <div class="entry">
+    <div>
+      <p class="tagline">
+      <%= link_to "[-]", "#", class: "expand" %>
+      <%= link_to "Authornamehere", "userurl", class: "author" %>
+      <%= "insert time here"%>
+      </p>
+
+      <div class="usertext-body usertext">
+        <div class="md">
+        <p><%= "insert comment body here" %></p>
+        </div>
+      </div>
+
+      <ul class="flat-list buttons">
+        <li><a href="#">permalink</a></li>
+        <li><a href="#">save</a></li>
+        <li><a href="#">report</a></li>
+        <li><a href="">reply</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- child div -->
+  <div class="child">
+
+  </div><!-- child div end -->
+</div><!-- end of comment div -->
+
+</div><!-- nestedlisting div end -->
+
+</div><!-- end of commentarea div -->
+
+
+
+<h4>------------------------------</h4>
 
 <%= link_to "New Comment", new_post_comment_url %>
 <br><br>
@@ -19,5 +81,3 @@
   <% end %>
 </ul>
 <!-- end of recursive comments -->
-
-</div>

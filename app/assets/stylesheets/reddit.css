@@ -8,7 +8,8 @@
 }
 	html
 {
-	height:100%
+	height:100%;
+  overflow-x:hidden
 }
 	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td,iframe
 {
@@ -345,51 +346,7 @@
 	line-height:12px;
 	border-top-left-radius:7px
 }
-	#mail
-{
-	position:relative;
-	top:2px;
-	display:inline-block;
-	text-indent:-9999px;
-	overflow:hidden;
-	width:15px;
-	height:10px
-}
-	#mail.havemail
-{
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
-	background-position:-71px -818px;
-	background-repeat:no-repeat
-}
-	#mail.nohavemail
-{
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
-	background-position:-92px -818px;
-	background-repeat:no-repeat
-}
-	#modmail
-{
-	position:relative;
-	top:-2px;
-	display:inline-block;
-	text-indent:-9999px;
-	overflow:hidden;
-	width:16px;
-	height:16px;
-	margin-bottom:-6px
-}
-	#modmail.havemail
-{
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
-	background-position:0px -730px;
-	background-repeat:no-repeat
-}
-	#modmail.nohavemail
-{
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
-	background-position:-22px -730px;
-	background-repeat:no-repeat
-}
+
 .user
 {
 	color:gray
@@ -456,7 +413,7 @@
 .dropdown.heavydrop .selected
 {
 	background:#ffffff none no-repeat scroll center right;
-	background-image:url(../droparrow.gif);
+
 	border:1px solid gray;
 	padding:2px;
 	padding-right:23px;
@@ -467,7 +424,7 @@
 {
 	position:relative;
 	background:none no-repeat scroll center right;
-	background-image:url(../droparrowgray.gif);
+
 	padding-right:21px;
 	text-decoration:underline;
 	color:gray
@@ -480,7 +437,7 @@
 {
 	position:relative;
 	background:#ffffff none no-repeat scroll center right;
-	background-image:url(../droparrowgray.gif);
+
 	padding:2px 21px 1px 5px;
 	margin-left:3px;
 	border:1px solid #5f99cf;

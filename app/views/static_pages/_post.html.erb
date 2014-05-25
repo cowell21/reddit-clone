@@ -16,7 +16,7 @@
   <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
     <%= link_to image_tag(post.url), post.url, class: "thumbnail" %>
   <% else %>
-    <%= link_to image_tag("no_img.gif"),
+    <%= link_to image_tag("no_img.gif", size: "100x100"),
      post_comments_url(post), class: "thumbnail" %>
   <% end %>
 

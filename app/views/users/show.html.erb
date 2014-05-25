@@ -1,45 +1,9 @@
 <h1>User Show</h1>
 
-<br>
-
 <!-- todo: sort by votes -->
 <% @posts.each_with_index do |post, idx| %>
 
-  <!-- rank number logic -->
-  #<%= ( @count + idx + 1 ) %>
-
-  <!-- net upvote/downvote display -->
-  <%= button_to "Upvote", upvote_post_url(action: :upvote, id: post.id) %>
-  <%= post.votes.sum(:value) %>
-  <%= button_to "Downvote", downvote_post_url(action: :downvote, id: post.id) %>
-
-  <!-- image logic -->
-  <% if post.url.include?(".jpg") || post.url.include?(".gif")  %>
-    <img src="<%= post.url %>" height="100" width="100">
-  <% else %>
-    <%= image_tag("no_img.gif", size: "100x100") %>
-  <% end %>
-
-  <!-- link logic -->
-  <% if post.url != "" %>
-    <%= link_to post.title, post.url %>
-    (<%= post.url.split('/')[2] %>)
-  <% else %>
-      <%= link_to post.title, post_url(post) %>
-  <% end %>
-  <br>
-
-  <!-- time logic -->
-  <% hours = (Time.now.to_i - post.created_at.to_i) / 3600 %>
-  <%= " Submited #{hours} hours ago by " %>
-
-  <!-- owner logic -->
-  <%= link_to post.user.username, user_url(post.user) %>
-
-  <!-- Comments Link -->
-  <%= link_to "Comments", post_comments_url(post)  %>
-
-  <br><br><br>
+  <%= render "static_pages/post", post: post, idx: idx %>
 
 <% end %>
 
