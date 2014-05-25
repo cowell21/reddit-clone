@@ -9,98 +9,22 @@
 </head>
 <body>
 
-<div id="header">
-  <div id="sr-header-area">
-    <div>
+<%= render "static_pages/header" %>
 
-    <div class="dropdown srdrop">
-      <span class="selected title">my subreddits</span>
-    </div>
+<div class="row">
 
-    <ul class="flat-list sr-bar">
-      <li class="selected"><%= link_to "front", root_url %> -</li>
-      <li><%= link_to "all", root_url %> -</li>
-      <li><%= link_to "random", root_url %></li>
-    </ul>|
-
-    <ul class="flat-list sr-bar">
-      <li><%= link_to "funny", "#" %> -</li>
-      <li><%= link_to "awww", "#" %> -</li>
-      <li><%= link_to "pics", "#" %> -</li>
-      <li><%= link_to "AskReddit", "#" %></li>
-    </ul>
-
-    </div>
+  <div class="col-sm-1">
+    <!-- padding the left side -->
   </div>
 
-  <div id="header-bottom-left">
-    <%= image_tag("logo.png") %>
-    <ul class="tabmenu ">
-      <li class="selected"><%= link_to "hot", "#" %></li>
-      <li><%= link_to "new", "#" %></li>
-      <li><%= link_to "rising", "#" %></li>
-    </ul>
+  <div class="col-sm-8">
+    <%= render "static_pages/errors" %>
+    <%= yield %>
   </div>
 
-  <div id="header-bottom-right">
-    <% if current_user %>
-        <%= link_to current_user.username, user_url(current_user) %> |
-        <%= link_to "messages (0)", "#" %> |
-        <%= link_to "preferences", "#" %> |
-        <%= link_to "logout", session_url, method: :delete %>
-      <% else %>
-      want to join?
-      <%= link_to "login", new_session_url %> or
-      <%= link_to "register", new_user_url %> in seconds
-    <% end %>
+  <div class="col-sm-3">
+  <%= render "static_pages/side" %>
   </div>
-
-</div> <!-- end of header div -->
-
-<div class="col-sm-1"></div>
-<div class="col-sm-8">
-
-    <% if flash[:errors] %>
-      <div class="alert alert-warning">
-      <% flash[:errors].each do |error| %>
-        <%= error %>
-      <% end %>
-      </div>
-    <% end %>
-
-  <%= yield %><!-- magic happens here -->
-
-</div>
-<div class="col-sm-3">
-  <!-- partial this out -->
-  <div class="side">
-
-  <form action="<%= root_url %>" id="search">
-    <input type="text" name="query" placeholder="search reddit">
-  </form>
-  <br>
-
-  <% unless current_user %>
-    <form method="post" action="<%= session_url %>"  class="jumbotron">
-      <input type="hidden" name="authenticity_token"
-      value="<%= form_authenticity_token %>">
-
-      <input name="user[username]" placeholder="username" type="text">
-      <input name="user[password]" placeholder="password" type="password">
-
-      <label><input type="checkbox">remember me</label>
-      <a href="#">reset password</a>
-
-      <button>login</button>
-    </form>
-  <% end %>
-
-  <%= link_to "Submit a new link", new_post_url, class: "morelink" %>
-  <br>
-  <%= link_to "Submit a new text post", new_post_url, class: "morelink" %>
-
-  </div>
-  <!-- end of partial out -->
 
 </div>
 
