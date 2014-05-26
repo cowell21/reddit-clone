@@ -1,23 +1,41 @@
-<h1>New Post</h1>
+<h4>submit to reddit clone</h4>
 
-<form action="<%= posts_url %>" method="post">
+<form class="submit content" action="<%= posts_url %>" method="post">
+
+<ul class="tabmenu formtab ">
+<li class="" id="link-li"><a href="#" class="link-button">link</a></li>
+<li class="selected" id="text-li"><a href="#" class="text-button">text</a></li>
+</ul>
+
+<div class="formtabs-content">
   <input type="hidden" name="authenticity_token"
   value="<%= form_authenticity_token %>">
 
-  <label>Title
-  <input type="text" name="post[title]" value="">
-  </label>
-  <br>
+  <div class="roundfield spacer" id="title-field">
+    <span class="title">title</span>
 
-  <label>URL
-  <input type="text" name="post[url]" value="">
-  </label>
-  <br>
+    <div class="roundfield-content">
+      <input id="title" type="text" name="post[title]">
+    </div>
+  </div>
 
-  <label>Body
-  <input type="text" name="post[body]" value="">
-  </label>
-  <br>
+  <div class="roundfield spacer" id="url-field">
+    <span class="title">url</span>
 
-  <button>Add Post</button>
+    <div class="roundfield-content">
+      <input id="url" name="post[url]" type="url">
+    </div>
+  </div>
+
+  <div class="roundfield spacer" id="text-field">
+    <span class="title">text</span>
+    <span class="gray">(optional)</span>
+
+    <div class="roundfield-content usertext">
+      <textarea name="post[body]"></textarea>
+    </div>
+  </div>
+</div><!-- end of formtabs-content -->
+
+<button>submit</button>
 </form>

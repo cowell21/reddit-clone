@@ -5629,7 +5629,7 @@
 }
 .roundfield
 {
-	width:500px;
+	width:auto;
 	background-color:#cee3f8;
 	border-radius:4px;
 	padding:5px 10px 10px 10px;

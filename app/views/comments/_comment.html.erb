@@ -9,10 +9,12 @@
     <%= javascript_tag "  $(document).ready(function(){
       $('##{comment.id.to_s}-slide').click(function(){
         if( $('##{comment.id}-body').is(':hidden') ) {
+          $('##{comment.id}-slide').text('[-]');
           $('##{comment.id}-body').show('slow');
           $('##{comment.id}-buttons').show('slow');
           $('##{comment.id}-child').show('slow');
         } else {
+          $('##{comment.id}-slide').text('[+]');
           $('##{comment.id}-body').slideUp('slow');
           $('##{comment.id}-buttons').slideUp('slow');
           $('##{comment.id}-child').slideUp('slow');
