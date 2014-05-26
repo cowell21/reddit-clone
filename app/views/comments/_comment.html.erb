@@ -1,18 +1,32 @@
-<div class="entry" id="comment-<%= comment.id %>">
+<div class="entry">
   <div>
     <p class="tagline">
-    <%= link_to "[-]", "#", class: "expand" %>
+    <%= link_to "[-]", "#" + comment.id.to_s + "-slide", id: comment.id.to_s + "-slide" %>
     <%= link_to comment.user.username, "#userurl", class: "author" %>
     <%= time_ago(comment.created_at) %>
     </p>
+    <!-- jquery slide hide/unhide -->
+    <%= javascript_tag "  $(document).ready(function(){
+      $('##{comment.id.to_s}-slide').click(function(){
+        if( $('##{comment.id}-body').is(':hidden') ) {
+          $('##{comment.id}-body').show('slow');
+          $('##{comment.id}-buttons').show('slow');
+          $('##{comment.id}-child').show('slow');
+        } else {
+          $('##{comment.id}-body').slideUp('slow');
+          $('##{comment.id}-buttons').slideUp('slow');
+          $('##{comment.id}-child').slideUp('slow');
+        }
+      });
+    });" %><!-- jquery slide hide/unhide end -->
 
-    <div class="usertext-body usertext">
+    <div class="usertext-body usertext" id="<%= comment.id %>-body">
       <div class="md">
       <p><%= comment.body %></p>
       </div>
     </div>
 
-    <ul class="flat-list buttons">
+    <ul class="flat-list buttons" id="<%= comment.id %>-buttons">
       <li><a href="#">permalink</a></li>
       <li><a href="#">save</a></li>
       <li><a href="#">report</a></li>
@@ -23,7 +37,7 @@
         <!-- jquery reply -->
         <%= javascript_tag "  $(document).ready(function(){
           $('#comment-#{comment.id.to_s}-reply').click(function(){
-            $('##{comment.id}-reply-form').css({'display': 'block'});
+            $('##{comment.id}-reply-form').show('slow');
           });
         });" %><!-- jquery reply end -->
 
@@ -40,7 +54,7 @@
   </div>
 </div>
 <!-- child div -->
-<div class="child">
+<div class="child" id="<%= comment.id %>-child">
 
   <form id="<%= comment.id %>-reply-form" action="<%= post_comments_url %>"
      method="post" class="usertext cloneable" style="display: none;">
@@ -58,7 +72,7 @@
       <!-- jquery reply -->
       <%= javascript_tag "  $(document).ready(function(){
         $('#disa-#{comment.id}').click(function(){
-          $('##{comment.id}-reply-form').css({'display': 'none'});
+          $('##{comment.id}-reply-form').slideUp('slow');;
         });
       });" %><!-- jquery reply end -->
 
