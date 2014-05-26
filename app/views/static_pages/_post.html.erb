@@ -80,6 +80,12 @@
       });" %><!-- end of jquery report -->
       <a href="#" id="link-report-<%= post.id %>">report</a>
     </li>
+
+    <% if current_user == post.user %>
+    <li>
+      <%= link_to "delete", post_url(post), method: :delete %>
+    </li>
+    <% end %>
     </ul>
   </div><!-- end of div class entry -->
 

@@ -2,10 +2,26 @@
 
 <form class="submit content" action="<%= posts_url %>" method="post">
 
+<% params["link"] ? link = true : link = false %>
+
 <ul class="tabmenu formtab ">
-<li class="" id="link-li"><a href="#" class="link-button">link</a></li>
-<li class="selected" id="text-li"><a href="#" class="text-button">text</a></li>
+<li class="<%= "selected" if link %>" id="link-li">
+  <a href="#" class="link-button">link</a>
+</li>
+
+<li class="<%= "selected" unless link %>" id="text-li">
+  <a href="#" class="text-button">text</a>
+</li>
 </ul>
+<!-- jquery action -->
+    <%= javascript_tag "$(document).ready(function(){
+      $('li').click(function(){
+          $('#link-li').toggleClass('selected');
+          $('#text-li').toggleClass('selected');
+          $('#text-field').toggle('fast');
+          $('#url-field').toggle('fast');
+      });
+    });" %>
 
 <div class="formtabs-content">
   <input type="hidden" name="authenticity_token"
@@ -19,7 +35,8 @@
     </div>
   </div>
 
-  <div class="roundfield spacer" id="url-field">
+  <div class="roundfield spacer" id="url-field"
+  style="<%= "display: none;" unless link %>">
     <span class="title">url</span>
 
     <div class="roundfield-content">
@@ -27,7 +44,8 @@
     </div>
   </div>
 
-  <div class="roundfield spacer" id="text-field">
+  <div class="roundfield spacer" id="text-field"
+  style="<%= "display: none;" if link %>">
     <span class="title">text</span>
     <span class="gray">(optional)</span>
 
