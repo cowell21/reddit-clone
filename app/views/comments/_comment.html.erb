@@ -16,7 +16,6 @@
       <li><a href="#">permalink</a></li>
       <li><a href="#">save</a></li>
       <li><a href="#">report</a></li>
-
       <% if current_user %>
       <li>
         <%= link_to "reply", "#comment-" + comment.id.to_s,
@@ -28,6 +27,12 @@
           });
         });" %><!-- jquery reply end -->
 
+      </li>
+      <% end %>
+      <% if current_user == comment.user && comment.child_comments.length == 0 %>
+      <li>
+      <%= link_to "delete",
+      post_comment_url(id: comment.id), method: :delete %>
       </li>
       <% end %>
 

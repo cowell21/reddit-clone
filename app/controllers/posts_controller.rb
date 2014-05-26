@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @posts = @posts.sort_by(&:sum_votes).reverse
     params[:count] ? @count = params[:count].to_i : @count = 0
     @total = @posts.length
-    @pagesize = 5 # change index page size here
+    @pagesize = 10 # change index page size here
 
     #paganation happens here
     if @count % @pagesize == 0 && @count < @total
