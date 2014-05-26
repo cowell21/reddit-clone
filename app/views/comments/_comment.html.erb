@@ -65,7 +65,8 @@
       <input type="hidden" name="comment[parent_id]"
       value="<%= comment.id %>">
 
-      <textarea name="comment[body]"> </textarea>
+      <textarea placeholder="reply to <%= comment.user.username %>'s comment"
+      name="comment[body]"></textarea>
 
       <button type="submit">save</button>
       <button id="disa-<%= comment.id%>" type="reset">cancel</button>
