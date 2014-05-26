@@ -1,4 +1,4 @@
-<div class="entry">
+<div class="entry" id="comment-<%= comment.id %>">
   <div>
     <p class="tagline">
     <%= link_to "[-]", "#", class: "expand" %>
@@ -19,7 +19,7 @@
 
       <% if current_user %>
       <li>
-        <%= link_to "reply", "#" + comment.id.to_s + "-reply-form",
+        <%= link_to "reply", "#comment-" + comment.id.to_s,
          id: "comment-" + comment.id.to_s + "-reply" %>
         <!-- jquery reply -->
         <%= javascript_tag "  $(document).ready(function(){
