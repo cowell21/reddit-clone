@@ -15,8 +15,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_comments_url(@post)
     else
-      flash[:errors] = @comment.errors.full_messages
-      redirect_to new_link_comment_url(params[:link_id])
+      flash[:errors] = ["comment body can't be blank"]
+      redirect_to post_comments_url(@post)
     end
 
   end

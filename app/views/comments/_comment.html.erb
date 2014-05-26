@@ -49,7 +49,14 @@
       <textarea name="comment[body]"> </textarea>
 
       <button type="submit">save</button>
-      <button type="cancel">cancel</button>
+      <button id="disa-<%= comment.id%>" type="reset">cancel</button>
+      <!-- jquery reply -->
+      <%= javascript_tag "  $(document).ready(function(){
+        $('#disa-#{comment.id}').click(function(){
+          $('##{comment.id}-reply-form').css({'display': 'none'});
+        });
+      });" %><!-- jquery reply end -->
+
     </div>
   </form>
 
