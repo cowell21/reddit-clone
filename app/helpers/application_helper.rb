@@ -16,8 +16,7 @@ module ApplicationHelper
   end
 
   def operation_add_aww
-    jsondata = open('http://www.reddit.com/r/aww/.json')
-    data = JSON[jsondata.read]
+    data = JSON[open('http://www.reddit.com/r/aww/.json').read]
 
     data["data"]["children"].each do |post|
       if post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
@@ -29,8 +28,7 @@ module ApplicationHelper
   end
 
   def operation_add
-    jsondata = open('http://www.reddit.com/.json')
-    data = JSON[jsondata.read]
+    data = JSON[open('http://www.reddit.com/.json').read]
 
     data["data"]["children"].each do |post|
       if post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
@@ -40,7 +38,5 @@ module ApplicationHelper
       end
     end
   end
-
-
 
 end
