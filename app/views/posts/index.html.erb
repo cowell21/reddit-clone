@@ -7,7 +7,9 @@
 <% end %>
 
 <!-- generates links like localhost:3000/?count=5 -->
-<%= link_to_if(@count && @count - @pagesize >= 0 ,
- "< Prev ", root_url(count: (@count - @pagesize)) ) %>
-<%= link_to_if( @total > @count + @pagesize,
- " Next >", root_url(count: @count + @pagesize) )%>
+<span class="nextprev">view more:
+  <%= link_to("‹ prev", root_url(count: (@count - @pagesize))
+  ) if @count && @count - @pagesize >= 0 %>
+  <%= link_to("next ›", root_url(count: (@count + @pagesize))
+  ) if @total > @count + @pagesize %>
+</span>
