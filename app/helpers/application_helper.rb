@@ -16,9 +16,8 @@ module ApplicationHelper
   end
 
   def operation_add_aww
-    jsondata1 = open('http://www.reddit.com/r/aww/.json')
-    jsondata2 = open('http://www.reddit.com/.json')
-    data = JSON[jsondata1.read].merge(JSON[jsondata2.read])
+    jsondata = open('http://www.reddit.com/r/aww/.json')
+    data = JSON[jsondata.read]
 
     data["data"]["children"].each do |post|
       if post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
@@ -27,7 +26,21 @@ module ApplicationHelper
         Post.create( title: title, url: url, user_id: 2) unless Post.find_by_title(title)
       end
     end
-
   end
+
+  def operation_add
+    jsondata = open('http://www.reddit.com/.json')
+    data = JSON[jsondata.read]
+
+    data["data"]["children"].each do |post|
+      if post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
+        title = post["data"]["title"]
+        url = post["data"]["url"]
+        Post.create( title: title, url: url, user_id: 2) unless Post.find_by_title(title)
+      end
+    end
+  end
+
+
 
 end
