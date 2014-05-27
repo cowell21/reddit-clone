@@ -11,42 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522211752) do
+ActiveRecord::Schema.define(version: 20140527182017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "comments", force: true do |t|
-    t.string   "body"
-    t.integer  "parent_id"
-    t.integer  "post_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "posts", force: true do |t|
-    t.string   "title"
-    t.string   "url"
-    t.string   "body"
-    t.string   "sub"
-    t.integer  "user_id"
+  create_table "comment_votes", force: true do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "comment_id",             null: false
     t.integer  "value",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "comment_votes", ["user_id", "comment_id"], name: "index_comment_votes_on_user_id_and_comment_id", unique: true, using: :btree
+
+  create_table "comments", force: true do |t|
+    t.string   "body",       null: false
+    t.integer  "parent_id"
+    t.integer  "post_id",    null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.string   "title",                      null: false
+    t.string   "url"
+    t.string   "body"
+    t.string   "sub",        default: "sub"
+    t.integer  "user_id",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
-    t.string   "username"
+    t.string   "username",        null: false
     t.string   "password_digest"
     t.string   "session_token"
+    t.integer  "fb_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "votes", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "user_id",                null: false
+    t.integer  "post_id",                null: false
     t.integer  "value",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"

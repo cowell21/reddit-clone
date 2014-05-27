@@ -47,4 +47,9 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :password, :session_token)
   end
 
+  def facebook_info
+    #returns facebook API data
+    JSON[open("http://graph.facebook.com/?id=#{user.fb_id}").read]
+  end
+
 end
