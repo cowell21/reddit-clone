@@ -32,7 +32,7 @@
       <li><a href="#">permalink</a></li>
       <li><a href="#">save</a></li>
       <li><a href="#">report</a></li>
-      <% if current_user %>
+      <% if current_user && @depth < 15 %>
       <li>
         <%= link_to "reply", "#comment-" + comment.id.to_s,
          id: "comment-" + comment.id.to_s + "-reply" %>
