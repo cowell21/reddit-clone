@@ -1,8 +1,8 @@
 <div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <!-- start of modal -->
 
+<!-- start of modal -->
 <div class="login-form-section divide register">
 <h3>create a new account</h3>
 <br>
@@ -44,13 +44,15 @@
     </label>
     </li>
 
+    <!-- jquery password matcher here -->
+
     <li>
     <label>
     <input type="checkbox">remember me
     </label>
     </li>
   </ul>
-<button class="btn btn-info">create account</button>
+  <button class="btn btn-info">create account</button>
   <p></p>
 </form>
 </div>
@@ -59,6 +61,7 @@
 <h3>login</h3>
 <br>
 
+<!-- start of login side -->
 <form method="post" action="<%= session_url %>">
   <input type="hidden" name="authenticity_token"
   value="<%= form_authenticity_token %>">
@@ -90,8 +93,8 @@
 </div>
 
 <div class="clear"></div>
+<!-- end of inside modal -->
 
-      <!-- end of inside modal -->
     </div>
   </div>
 </div>

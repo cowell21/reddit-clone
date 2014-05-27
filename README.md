@@ -8,3 +8,5 @@ Todos:
 sub reddits
 user saves/shares
 comment ranking system
+APIs
+Ajax some comments
