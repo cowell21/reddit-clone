@@ -7,9 +7,9 @@
 
   <!-- voting -->
   <div class="midcol">
-    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id) %>
+    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id), class: "upvote" %>
     <div class="score"><%= post.votes.sum(:value) %></div>
-    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id) %>
+    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id), class: "downvote" %>
   </div>
 
   <!-- img logic -->
@@ -75,7 +75,7 @@
       <!-- jquery report -->
       <%= javascript_tag "  $(document).ready(function(){
         $('#link-report-#{ post.id }').click(function(){
-          alert('#{post.title} post has been report to Admins');
+          alert('post id #{post.id} has been report to Admins');
         });
       });" %><!-- end of jquery report -->
       <a href="#" id="link-report-<%= post.id %>">report</a>

@@ -39,8 +39,10 @@
         <%= link_to "logout", session_url, method: :delete %>
       <% else %>
       want to join?
-      <%= link_to "login", new_session_url %> or
-      <%= link_to "register", new_user_url %> in seconds
+      <%= link_to "login", "#", "data-toggle" => "modal",
+      "data-target" => ".login-modal", class: "modal-time" %> or
+      <%= link_to "register", "#", "data-toggle" => "modal",
+      "data-target" => ".login-modal" %> in seconds
     <% end %>
   </div>
 </div>

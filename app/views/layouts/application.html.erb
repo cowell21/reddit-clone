@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<%= render "static_pages/modal" unless current_user %>
+
 <%= render "static_pages/header" %>
 
 <div class="row">
@@ -41,3 +43,17 @@
 
 </body>
 </html>
+<% unless current_user %>
+<script>
+$(function() {
+   $(".upvote").click(function(event){
+     event.preventDefault();
+     $(".modal-time").trigger("click");
+   });
+   $(".downvote").click(function(event){
+     event.preventDefault();
+     $(".modal-time").trigger("click");
+   });
+});
+</script>
+<%end%>
