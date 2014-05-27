@@ -1,18 +1,105 @@
-<h1>Sign In</h1>
+<!-- Large modal -->
+<button class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Large modal</button>
 
-<form action="<%= session_url %>" method="post">
+<a id="testmodal" href="#">modal</a>
+<script>
+  $('.login-modal').modal('show')
+</script>
 
+<div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- start of modal -->
+
+<div class="login-form-section divide register">
+<h3>create a new account</h3>
+<br>
+
+<div class="registration-info">
+  <div class="md wiki">
+  <h3>About Reddit-Clone</h3>
+    <ul>
+      <li>Website was designed by Chris Cowell</li>
+    </ul>
+  </div><!-- end of wiki -->
+</div>
+
+<form method="post" action="<%= users_url %>">
   <input type="hidden" name="authenticity_token"
   value="<%= form_authenticity_token %>">
+  <ul>
+    <li>
+    <label>username:<br>
+    <input name="user[username]" type="text">
+    </label>
+    </li>
 
-  <label>Username
-  <input type="text" name="user[username]" value="">
-  <label>
+    <li>
+    <label>acount reovery email: <i>(optional)</i><br>
+    <input name="user[email]" type="email">
+    </label>
+    </li>
 
-  <label>Password
-  <input type="password" name="user[password]" value="">
-  <label>
+    <li>
+    <label>password:<br>
+    <input name="user[password]" type="password">
+    </label>
+    </li>
 
-  <input type="submit" value="Sign In">
+    <li>
+    <label>verify password:<br>
+    <input name="user[password2]" type="password">
+    </label>
+    </li>
 
+    <li>
+    <label>
+    <input type="checkbox">remember me
+    </label>
+    </li>
+  </ul>
+<button class="btn btn-info">create account</button>
+  <p></p>
 </form>
+</div>
+
+<div class="login-form-section login">
+<h3>login</h3>
+<br>
+
+<form method="post" action="<%= session_url %>">
+  <input type="hidden" name="authenticity_token"
+  value="<%= form_authenticity_token %>">
+<ul>
+<li>
+<label>username:<br>
+<input name="user[username]" type="text">
+</label>
+</li>
+
+<li>
+<label>password:<br>
+<input name="user[password]" type="password">
+</label>
+</li>
+
+<li>
+<input id="rem_login" type="checkbox">
+<label for="rem_login" class="remember">remember me</label>
+</li>
+
+<li>
+<a class="recover-password" href="#">recover password</a>
+</li>
+</ul>
+
+<button class="btn btn-info" type="submit">login</button>
+</form>
+</div>
+
+<div class="clear"></div>
+
+      <!-- end of inside modal -->
+    </div>
+  </div>
+</div>
