@@ -7,10 +7,22 @@
 
   <!-- voting -->
   <div class="midcol">
-    <a href="<%= upvote_post_url(action: :upvote, id: post.id) %>" class="upvote"><span class='glyphicon glyphicon-arrow-up' style='color:grey'></span></a>
+    <a href="<%= upvote_post_url(action: :upvote, id: post.id) %>"
+      class="upvote">
+    <span class='glyphicon glyphicon-arrow-up' style='color:grey'></span>
+    </a>
+
     <div class="score"><%= post.votes.sum(:value) %></div>
-        <a href="<%= upvote_post_url(action: :downvote, id: post.id) %>" class="downvote"><span class='glyphicon glyphicon-arrow-down' style='color:grey'></span></a>
+
+    <a href="<%= downvote_post_url(action: :downvote, id: post.id) %>"
+      class="downvote">
+    <span class='glyphicon glyphicon-arrow-down' style='color:grey'></span>
+    </a>
   </div>
+  <!-- js voting action -->
+  <script>
+
+  </script>
 
   <!-- img logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
@@ -20,7 +32,7 @@
      post_comments_url(post), class: "thumbnail" %>
   <% end %>
 
-  <!-- vote logic -->
+  <!-- title/url logic -->
   <div class="entry">
     <p class="title">
     <% if post.url != "" %>
