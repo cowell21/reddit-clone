@@ -43,17 +43,3 @@
 
 </body>
 </html>
-<% unless current_user %>
-<script>
-$(function() {
-   $(".upvote").click(function(event){
-     event.preventDefault();
-     $(".modal-time").trigger("click");
-   });
-   $(".downvote").click(function(event){
-     event.preventDefault();
-     $(".modal-time").trigger("click");
-   });
-});
-</script>
-<%end%>

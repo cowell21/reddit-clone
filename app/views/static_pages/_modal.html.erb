@@ -95,3 +95,15 @@
     </div>
   </div>
 </div>
+<script>
+$(function() {
+   $(".upvote").click(function(event){
+     event.preventDefault();
+     $(".modal-time").trigger("click");
+   });
+   $(".downvote").click(function(event){
+     event.preventDefault();
+     $(".modal-time").trigger("click");
+   });
+});
+</script>
