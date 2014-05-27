@@ -7,9 +7,9 @@
 
   <!-- voting -->
   <div class="midcol">
-    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id), class: "upvote" %>
+    <a href="<%= upvote_post_url(action: :upvote, id: post.id) %>" class="upvote"><span class='glyphicon glyphicon-arrow-up' style='color:grey'></span></a>
     <div class="score"><%= post.votes.sum(:value) %></div>
-    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id), class: "downvote" %>
+        <a href="<%= upvote_post_url(action: :downvote, id: post.id) %>" class="downvote"><span class='glyphicon glyphicon-arrow-down' style='color:grey'></span></a>
   </div>
 
   <!-- img logic -->

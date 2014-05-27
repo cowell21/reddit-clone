@@ -37,6 +37,11 @@ class User < ActiveRecord::Base
     self.session_token
   end
 
+  def get_facebook_id(fb_username)
+    self.fb_id = JSON[open("http://graph.facebook.com/#{fb_username}").read]
+    self.save
+  end
+
   private
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
