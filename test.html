@@ -1,0 +1,6 @@
+  <!-- voting -->
+  <div class="midcol">
+    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id), class: "upvote" %>
+    <div class="score"><%= post.votes.sum(:value) %></div>
+    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id), class: "downvote" %>
+  </div>

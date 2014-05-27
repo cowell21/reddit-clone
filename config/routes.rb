@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:create, :new, :show, :index, :destroy]
     member do
-      post "upvote"
-      post "downvote"
+      get "upvote"
+      get "downvote"
     end
   end
 

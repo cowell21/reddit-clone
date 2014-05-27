@@ -7,22 +7,16 @@
 
   <!-- voting -->
   <div class="midcol">
-    <a href="<%= upvote_post_url(action: :upvote, id: post.id) %>"
-      class="upvote">
-    <span class='glyphicon glyphicon-arrow-up' style='color:grey'></span>
-    </a>
-
+    <%= link_to "<span class='glyphicon glyphicon-arrow-up' style='color:grey'></span>".html_safe, upvote_post_url(action: :upvote, id: post.id), class: "upvote" %>
     <div class="score"><%= post.votes.sum(:value) %></div>
-
-    <a href="<%= downvote_post_url(action: :downvote, id: post.id) %>"
-      class="downvote">
-    <span class='glyphicon glyphicon-arrow-down' style='color:grey'></span>
-    </a>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-down' style='color:grey'></span>".html_safe, downvote_post_url(action: :downvote, id: post.id), class: "downvote" %>
   </div>
   <!-- js voting action -->
+  <% if current_user %>
   <script>
 
   </script>
+  <% end %>
 
   <!-- img logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
