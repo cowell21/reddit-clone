@@ -34,7 +34,7 @@
   <div id="header-bottom-right">
     <% if current_user %>
         <%= link_to current_user.username, user_url(current_user) %> |
-        <%= link_to "messages (0)", "#" %> |
+        <%= link_to "messages (0)", "#", "data-toggle" => "tooltip", "data-placement" => "bottom", title: "messages system is a todo" %> |
         <%= link_to "preferences", "#" %> |
         <%= link_to "logout", session_url, method: :delete %>
       <% else %>

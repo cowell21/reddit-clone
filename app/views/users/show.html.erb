@@ -1,15 +1,16 @@
-<h1>User Show</h1>
+<%= "<h1>No Results Found!</h1>".html_safe if @posts.length == 0 %>
+<br><br>
 
-<!-- todo: sort by votes -->
 <% @posts.each_with_index do |post, idx| %>
 
-  <%= render "static_pages/post", post: post, idx: idx %>
+ <%= render "static_pages/post", post: post, idx: idx %>
 
 <% end %>
 
-<!-- Next & Prev link pagation logic -->
 <!-- generates links like localhost:3000/?count=5 -->
-<%= link_to_if(@count && @count - @pagesize >= 0 ,
- "< Prev ", user_url(count: (@count - @pagesize)) ) %>
-<%= link_to_if( @total > @count + @pagesize,
- " Next >", user_url(count: @count + @pagesize) )%>
+<span class="nextprev">view more:
+ <%= link_to("‹ prev", root_url(count: (@count - @pagesize))
+ ) if @count && @count - @pagesize >= 0 %>
+ <%= link_to("next ›", root_url(count: (@count + @pagesize))
+ ) if @total > @count + @pagesize %>
+</span>
