@@ -42,6 +42,7 @@
 
   <% comments_by_parent[nil].each do |top_level_comments| %>
 
+    <% @depth = 0 %>
     <div class="comment">
        <%= comment_partial(top_level_comments, comments_by_parent) %>
     </div>

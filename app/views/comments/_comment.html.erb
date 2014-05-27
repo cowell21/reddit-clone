@@ -82,7 +82,11 @@
     </div>
   </form>
 
-  <% comments_by_parent[comment.id].each do |child_comment| %>
-    <%= comment_partial(child_comment, comments_by_parent) %>
+  <% if @depth < 15 %>
+    <% comments_by_parent[comment.id].each do |child_comment| %>
+      <% @depth += 1 %>
+      <%= comment_partial(child_comment, comments_by_parent) %>
+      <% @depth -= 1 %>
+    <% end %>
   <% end %>
 </div><!-- child div end -->
