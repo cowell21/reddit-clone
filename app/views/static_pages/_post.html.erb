@@ -7,16 +7,55 @@
 
   <!-- voting -->
   <div class="midcol">
-    <%= link_to "<span class='glyphicon glyphicon-arrow-up' style='color:grey'></span>".html_safe, upvote_post_url(action: :upvote, id: post.id), class: "upvote" %>
-    <div class="score"><%= post.votes.sum(:value) %></div>
-    <%= link_to "<span class='glyphicon glyphicon-arrow-down' style='color:grey'></span>".html_safe, downvote_post_url(action: :downvote, id: post.id), class: "downvote" %>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-up' style='color:grey'></span>".html_safe, "#", class: "upvote", id: "upvote-#{post.id}" %>
+    <div id="score-<%= post.id %>" class="score"><%= post.votes.sum(:value) %></div>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-down' style='color:grey'></span>".html_safe, "#", class: "downvote", id: "downvote-#{post.id}" %>
   </div>
-  <!-- js voting action -->
+  <!-- ajax magic -->
   <% if current_user %>
   <script>
+  $( "#upvote-<%= post.id %>" ).click(function() {
 
+  $.ajax({
+    url: "<%= upvote_post_url(action: :upvote, id: post.id) %>",
+    type: "GET",
+    success: function () {
+      $.ajax({
+        url: "<%= post_comments_url(post) %>.json",
+        type: "GET",
+        success: function (data) {
+          var score = data.score;
+          $("#score-<%= post.id %>").text(score);
+        }
+      });//end of nested ajax request
+    }
+  });
+
+  });
+
+  $( "#downvote-<%= post.id %>" ).click(function() {
+
+  $.ajax({
+    url: "<%= downvote_post_url(action: :downvote, id: post.id) %>",
+    type: "GET",
+    success: function () {
+      $.ajax({
+        url: "<%= post_comments_url(post) %>.json",
+        type: "GET",
+        success: function (data) {
+          var score = data.score;
+          $("#score-<%= post.id %>").text(score);
+        }
+      });//end of nested ajax request
+    }
+  });
+
+  });
   </script>
   <% end %>
+  <!-- upvote_post_url(action: :upvote, id: post.id) -->
+  <!-- var score = parseInt($('#score-<%= post.id %>').text()) + 1;
+  $("#score-1").text(score); -->
 
   <!-- img logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif") %>

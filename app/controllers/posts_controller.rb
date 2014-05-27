@@ -37,10 +37,6 @@ class PostsController < ApplicationController
       @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
     end
 
-    # respond_to do |format|
-    #   format.html { render :index }
-    #   format.json { render json: @posts }
-    # end
   end
 
   # def search
