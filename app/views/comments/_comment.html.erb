@@ -30,7 +30,28 @@
 
     <ul class="flat-list buttons" id="<%= comment.id %>-buttons">
       <li><a href="#">permalink</a></li>
-      <li><a href="#">save</a></li>
+
+      <li>
+        <%= link_to "save", "#", class: "comment-save-#{comment.id} save" %>
+        <!-- jquery hide -->
+        <% if current_user %>
+        <%= javascript_tag "  $(document).ready(function(){
+          $('.comment-save-#{comment.id}').click(function(){
+            event.preventDefault();
+            if ($('.comment-save-#{comment.id}').text() === 'save' ){
+              $('.comment-save-#{comment.id}').text('unsave');
+            } else {
+              $('.comment-save-#{comment.id}').text('save');
+            }
+          });
+        });" %><!-- jquery hide end -->
+        <% end %>
+      </li>
+
+      <% if comment.parent_id %>
+      <li><a href="#<%= comment.parent_id %>-slide">parent</a></li>
+      <% end %>
+
       <li><a href="#">report</a></li>
       <% if current_user && @depth < 15 %>
       <li>

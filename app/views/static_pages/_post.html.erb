@@ -150,6 +150,7 @@
       <%= link_to "share", "#", class: "share-#{post.id} share" %>
       <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
+        event.preventDefault();
         $('.share-#{post.id.to_s}').click(function(){
           if ($('.share-#{post.id.to_s}').text() === 'share') {
             $('##{post.id}-share-form').show('slow');
@@ -169,6 +170,7 @@
       <!-- jquery hide -->
       <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
+        event.preventDefault();
         $('.link-save-#{post.id}').click(function(){
           if ($('.link-save-#{post.id}').text() === 'save' ){
             $('.link-save-#{post.id}').text('unsave');
