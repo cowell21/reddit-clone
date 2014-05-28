@@ -1,6 +1,116 @@
-  <!-- voting -->
-  <div class="midcol">
-    <%= button_to "+", upvote_post_url(action: :upvote, id: post.id), class: "upvote" %>
-    <div class="score"><%= post.votes.sum(:value) %></div>
-    <%= button_to "-", downvote_post_url(action: :downvote, id: post.id), class: "downvote" %>
-  </div>
+
+
+<form method="post" id="" class="pretty-form sharelink">
+
+<div class="clearleft"></div>
+
+<table class="sharetable preftable">
+<tbody>
+<tr>
+<th>
+  <label>send this link to
+  <span class="little gray">(list of emails or usernames)</span>
+  </label>
+</th>
+<td>
+<textarea id="share_to_41277422197163105" name="share_to" rows="4" cols="40" placeholder="email@example.com, /u/reddit, …">
+</textarea>
+</td>
+<td class="share-to-errors">
+
+</td>
+</tr>
+<tr>
+<th>
+<label for="share_from_41277422197163105">your name</label>
+
+<span class="little gray">(optional)</span>
+</th>
+<td>
+<input value="<%= current_user.username %>" type="text" name="share_from">
+</td>
+</tr>
+
+<tr>
+  <th>
+    <label>your email
+    <span class="little gray">(optional)</span>
+    </label>
+  </th>
+
+  <td>
+    <input name="share[]" type="text" size="30">
+  </td>
+</tr>
+
+<tr>
+<th>
+<label for="message_41277422197163105">message</label>
+
+<span class="little gray">(optional)
+</span>
+</th>
+<td>
+<textarea name="message" rows="4" cols="40"></textarea>
+</td>
+
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+
+<tr>
+<td>
+</td>
+<td>
+<button type="submit">share</button>
+<button>cancel</button>
+</td>
+<td>
+</td>
+
+</tr></tbody>
+</table>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="child" id="<%= post.id %>-child">
+
+    <form id="<%= post.id %>-share-form" action="#"
+       method="" class="usertext cloneable" style="display: none;">
+      <div class="usertext-edit">
+        <input type="hidden" name="authenticity_token"
+        value="<%= form_authenticity_token %>">
+
+        <textarea placeholder="email@example.com"
+        name="comment[body]"></textarea>
+
+        <button type="submit">share</button>
+        <button id="disa-<%= post.id %>" type="reset">cancel</button>
+        <!-- jquery reply -->
+        <%= javascript_tag "  $(document).ready(function(){
+          $('#disa-#{post.id}').click(function(){
+            $('##{post.id}-share-form').slideUp('slow');;
+          });
+        });" %><!-- jquery reply end -->
+      </div>
+    </form>
+
+  </div><!-- end of child comment -->

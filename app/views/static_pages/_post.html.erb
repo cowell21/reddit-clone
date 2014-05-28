@@ -151,7 +151,13 @@
       <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
         $('.share-#{post.id.to_s}').click(function(){
-          $('##{post.id}-share-form').show('slow');
+          if ($('.share-#{post.id.to_s}').text() === 'share') {
+            $('##{post.id}-share-form').show('slow');
+            $('.share-#{post.id.to_s}').text('cancel');
+          } else {
+            $('##{post.id}-share-form').slideUp('slow');
+            $('.share-#{post.id.to_s}').text('share');
+          };
         });
       });" %><!-- jquery reply end -->
       <% end %>
@@ -207,24 +213,76 @@
 
     <form id="<%= post.id %>-share-form" action="#"
        method="" class="usertext cloneable" style="display: none;">
-      <div class="usertext-edit">
+      <br><br>
+
         <input type="hidden" name="authenticity_token"
         value="<%= form_authenticity_token %>">
 
-        <textarea placeholder="email@example.com"
-        name="comment[body]"></textarea>
+        <!-- table start -->
+        <table>
+        <tr>
+          <th>
+            <label>send this link to</label><br>
+            <span class="little gray">(list of emails)</span>
+          </th>
+        <!-- - -->
+          <td>
+          <textarea rows="4" cols="40" name="share_to" placeholder="email@example.com"></textarea>
+          </td>
+        </tr>
 
-        <button type="submit">share</button>
-        <button id="disa-<%= post.id %>" type="reset">cancel</button>
+        <tr>
+          <th>
+          <label>your name</label><br>
+          <span class="little gray">(optional)</span>
+          </th>
+        <!-- - -->
+          <td>
+          <input value="<%= current_user.username %>" type="text" size="39" name="share[from]">
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+            <label>your email</label><br>
+            <span class="little gray">(optional)</span>
+          </th>
+        <!-- - -->
+          <td>
+            <input name="share[email]" type="text" size="39">
+          </td>
+        </tr>
+
+        <tr>
+          <th>
+          <label>message</label>
+          <br>
+          <span class="little gray">(optional)</span>
+          </th>
+        <!-- - -->
+          <td>
+          <textarea rows="4" cols="40" name="message"></textarea>
+          </td>
+        </tr>
+
+        <tr><td>
+          </td><td>
+          <button type="submit">share</button>
+          <button id="disa-<%= post.id %>" type="reset">cancel</button>
+        </td></tr>
+
+        </table>
+        <!-- table end -->
+
         <!-- jquery reply -->
         <%= javascript_tag "  $(document).ready(function(){
           $('#disa-#{post.id}').click(function(){
             $('##{post.id}-share-form').slideUp('slow');;
+            $('.share-#{post.id.to_s}').text('share');
           });
         });" %><!-- jquery reply end -->
-      </div>
-    </form>
 
+    </form>
   </div><!-- end of child comment -->
 
   <div class="clearleft"></div>

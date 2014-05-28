@@ -1,13 +1,64 @@
 <h1>About</h1>
 
-<span class="glyphicon glyphicon-arrow-up" style="color:green"></span>
-<br>
-<span class="glyphicon glyphicon-arrow-down" style="color:red"></span>
+<form method="post" id="" class="usertext">
 
-<br><br>
+<div class="clearleft"></div>
 
-<span class="glyphicon glyphicon-arrow-up" style="color:grey"></span>
-<br>
-<span class="glyphicon glyphicon-arrow-down" style="color:grey"></span>
+<table>
+<tbody>
+
+<tr>
+  <th>
+    <label>send this link to</label><br>
+    <span class="little gray">(list of emails or usernames)</span>
+  </th>
+<!-- - -->
+  <td>
+  <textarea rows="4" cols="40" name="share_to" placeholder="email@example.com"></textarea>
+  </td>
+</tr>
+
+<tr>
+  <th>
+  <label>your name</label><br>
+  <span class="little gray">(optional)</span>
+  </th>
+<!-- - -->
+  <td>
+  <input value="<%= current_user.username %>" type="text" size="39" name="share[from]">
+  </td>
+</tr>
+
+<tr>
+  <th>
+    <label>your email</label><br>
+    <span class="little gray">(optional)</span>
+  </th>
+<!-- - -->
+  <td>
+    <input name="share[email]" type="text" size="39">
+  </td>
+</tr>
+
+<tr>
+  <th>
+  <label>message</label>
+  <br>
+  <span class="little gray">(optional)</span>
+  </th>
+<!-- - -->
+  <td>
+  <textarea rows="4" cols="40" name="message"></textarea>
+  </td>
+</tr>
 
 
+<tr><td>
+  </td><td>
+  <button type="submit">share</button>
+  <button>cancel</button>
+</td></tr>
+
+</tbody>
+</table>
+</form>
