@@ -22,8 +22,6 @@ Post.create( title: "pizza fries", url: "http://i.imgur.com/5ywsGIw.jpg", user_i
 Post.create( title: "kangaroo", url: "http://i.imgur.com/cQ5E4ID.jpg", user_id: 2)
 Post.create( title: "ESPN", url: "http://www.espn.com", body: "Sport News Website", user_id: 2)
 Post.create( title: "google", url: "http://www.google.com", body: "search engine", user_id: 2)
-Post.create( title: "reddit", url: "http://www.reddit.com", body: "A fun site", user_id: 2)
-Post.create( title: "Whatcha doin?", url: "http://i.imgur.com/kijXP0K.jpg", user_id: 3)
 Post.create( title: "Low pressure condensation", url: "http://i.imgur.com/1vLQ1vj.jpg", user_id: 5)
 #Post.create( title: "", url: "", user_id: 1)
 

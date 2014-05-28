@@ -146,9 +146,29 @@
        post_comments_url(post) %>
     </li>
 
-    <li><%= link_to "share", "#" %></li>
+    <li>
+      <%= link_to "share", "#", class: "share-#{post.id}" %>
+      <%= javascript_tag "  $(document).ready(function(){
+        $('.share-#{post.id.to_s}').click(function(){
+          $('##{post.id}-share-form').show('slow');
+        });
+      });" %><!-- jquery reply end -->
+    </li>
 
-    <li><%= link_to "save", "#" %></li>
+
+    <li>
+      <%= link_to "save", "#", class: "link-save-#{post.id}" %>
+      <!-- jquery hide -->
+      <%= javascript_tag "  $(document).ready(function(){
+        $('.link-save-#{post.id}').click(function(){
+          if ($('.link-save-#{post.id}').text() === 'save' ){
+            $('.link-save-#{post.id}').text('unsave');
+          } else {
+            $('.link-save-#{post.id}').text('save');
+          }
+        });
+      });" %><!-- jquery hide end -->
+    </li>
 
     <li>
       <!-- jquery hide -->
@@ -177,6 +197,31 @@
     <% end %>
     </ul>
   </div><!-- end of div class entry -->
+
+
+  <div class="child" id="<%= post.id %>-child">
+
+    <form id="<%= post.id %>-share-form" action="#"
+       method="" class="usertext cloneable" style="display: none;">
+      <div class="usertext-edit">
+        <input type="hidden" name="authenticity_token"
+        value="<%= form_authenticity_token %>">
+
+        <textarea placeholder="email@example.com"
+        name="comment[body]"></textarea>
+
+        <button type="submit">share</button>
+        <button id="disa-<%= post.id %>" type="reset">cancel</button>
+        <!-- jquery reply -->
+        <%= javascript_tag "  $(document).ready(function(){
+          $('#disa-#{post.id}').click(function(){
+            $('##{post.id}-share-form').slideUp('slow');;
+          });
+        });" %><!-- jquery reply end -->
+      </div>
+    </form>
+
+  </div><!-- end of child comment -->
 
   <div class="clearleft"></div>
 
