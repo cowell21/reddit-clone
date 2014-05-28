@@ -147,18 +147,21 @@
     </li>
 
     <li>
-      <%= link_to "share", "#", class: "share-#{post.id}" %>
+      <%= link_to "share", "#", class: "share-#{post.id} share" %>
+      <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
         $('.share-#{post.id.to_s}').click(function(){
           $('##{post.id}-share-form').show('slow');
         });
       });" %><!-- jquery reply end -->
+      <% end %>
     </li>
 
 
     <li>
-      <%= link_to "save", "#", class: "link-save-#{post.id}" %>
+      <%= link_to "save", "#", class: "link-save-#{post.id} save" %>
       <!-- jquery hide -->
+      <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
         $('.link-save-#{post.id}').click(function(){
           if ($('.link-save-#{post.id}').text() === 'save' ){
@@ -168,6 +171,7 @@
           }
         });
       });" %><!-- jquery hide end -->
+      <% end %>
     </li>
 
     <li>
