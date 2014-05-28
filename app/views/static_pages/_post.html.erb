@@ -9,22 +9,22 @@
 <% if current_user && !!Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
 <% vote = Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
   <% if vote.value == 0 %>
-    <% voteup_color = "color:grey" %>
-    <% score_color = "color:grey"%>
-    <% votedown_color = "color:grey" %>
+    <% voteup_color = "color:lightgrey" %>
+    <% score_color = "color:lightgrey"%>
+    <% votedown_color = "color:lightgrey" %>
   <% elsif vote.value == -1 %>
-    <% voteup_color = "color:grey" %>
+    <% voteup_color = "color:lightgrey" %>
     <% score_color = "color:purple"%>
     <% votedown_color = "color:purple" %>
   <% else%>
     <% voteup_color = "color:orange" %>
     <% score_color = "color:orange"%>
-    <% votedown_color = "color:grey" %>
+    <% votedown_color = "color:lightgrey" %>
   <% end %>
 <% else %>
-  <% voteup_color = "color:grey" %>
-  <% score_color = "color:grey"%>
-  <% votedown_color = "color:grey" %>
+  <% voteup_color = "color:lightgrey" %>
+  <% score_color = "color:lightgrey"%>
+  <% votedown_color = "color:lightgrey" %>
 <% end %>
 
   <!-- voting rendering | it's a mess -->
@@ -55,11 +55,11 @@
           if (score > oldScore) {
             $("#upvote-gly-<%= post.id %>").css( "color", "orange" );
             $("#score-<%= post.id %>").css( "color", "orange" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "lightgrey" );
           } else {
-            $("#upvote-gly-<%= post.id %>").css( "color", "grey" );
-            $("#score-<%= post.id %>").css( "color", "grey" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#upvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#score-<%= post.id %>").css( "color", "lightgrey" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "lightgrey" );
           };
         }
       });//end of nested ajax request
@@ -84,11 +84,11 @@
           var score = data.score;
           $("#score-<%= post.id %>").text(score);
           if (score > oldScore) {
-            $("#upvote-gly-<%= post.id %>").css( "color", "grey" );
-            $("#score-<%= post.id %>").css( "color", "grey" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#upvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#score-<%= post.id %>").css( "color", "lightgrey" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "lightgrey" );
           } else {
-            $("#upvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#upvote-gly-<%= post.id %>").css( "color", "lightgrey" );
             $("#score-<%= post.id %>").css( "color", "purple" );
             $("#downvote-gly-<%= post.id %>").css( "color", "purple" );
           };
