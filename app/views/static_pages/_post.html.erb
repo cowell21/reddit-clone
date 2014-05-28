@@ -240,7 +240,7 @@
           </th>
         <!-- - -->
           <td>
-          <input value="<%= current_user.username %>" type="text" size="39" name="share[from]">
+          <input value="<%= current_user.username if current_user%>" type="text" size="39" name="share[from]">
           </td>
         </tr>
 

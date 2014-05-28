@@ -37,10 +37,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-
     comment = Comment.find(params[:id])
-    comment.destroy
+    comment.body = "[comment deleted by #{current_user.username}]"
+    comment.save
     redirect_to post_comments_url(comment.post)
+
+    # comment = Comment.find(params[:id])
+    # comment.destroy
+    # redirect_to post_comments_url(comment.post)
   end
 
   private

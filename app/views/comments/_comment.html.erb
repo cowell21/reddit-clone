@@ -24,7 +24,13 @@
 
     <div class="usertext-body usertext" id="<%= comment.id %>-body">
       <div class="md">
-      <p><%= comment.body %></p>
+      <p>
+        <% if comment.body.include?("[comment deleted by")%>
+        <%= "<i style='color:lightgrey'>#{comment.body}</i>".html_safe %>
+        <% else%>
+        <%= comment.body %>
+        <% end %>
+      </p>
       </div>
     </div>
 
@@ -66,7 +72,7 @@
 
       </li>
       <% end %>
-      <% if current_user == comment.user && comment.child_comments.length == 0 %>
+      <% if current_user == comment.user  && !comment.body.include?("[comment deleted by") %>
       <li>
       <%= link_to "delete",
       post_comment_url(id: comment.id), method: :delete %>
