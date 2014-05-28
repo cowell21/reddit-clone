@@ -6,7 +6,7 @@
   </span>
 
 <!-- voting color selection -->
-<% if !!Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
+<% if current_user && !!Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
 <% vote = Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
   <% if vote.value == 0 %>
     <% voteup_color = "color:grey" %>
