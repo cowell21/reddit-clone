@@ -5,11 +5,34 @@
     <%= ( @count + idx + 1 ) if @count %>
   </span>
 
-  <!-- voting -->
+<% if !!Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
+<% vote = Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
+  <% if vote.value == 0 %>
+    <% voteup_color = "color:grey" %>
+    <% score_color = "color:grey"%>
+    <% votedown_color = "color:grey" %>
+  <% elsif vote.value == -1 %>
+    <% voteup_color = "color:grey" %>
+    <% score_color = "color:red"%>
+    <% votedown_color = "color:red" %>
+  <% else%>
+    <% voteup_color = "color:green" %>
+    <% score_color = "color:green"%>
+    <% votedown_color = "color:grey" %>
+  <% end %>
+<% else %>
+  <% voteup_color = "color:grey" %>
+  <% score_color = "color:grey"%>
+  <% votedown_color = "color:grey" %>
+<% end %>
+
+  <!-- voting | it's a mess -->
   <div class="midcol">
-    <%= link_to "<span class='glyphicon glyphicon-arrow-up' style='color:grey'></span>".html_safe, "#", class: "upvote", id: "upvote-#{post.id}" %>
-    <div id="score-<%= post.id %>" class="score"><%= post.votes.sum(:value) %></div>
-    <%= link_to "<span class='glyphicon glyphicon-arrow-down' style='color:grey'></span>".html_safe, "#", class: "downvote", id: "downvote-#{post.id}" %>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-up' style='#{voteup_color}'></span>".html_safe, "#post-#{post.id}", class: "upvote", id: "upvote-#{post.id}" %>
+    <div id="score-<%= post.id %>" style="<%= score_color %>" class="score">
+      <%= post.votes.sum(:value) %>
+    </div>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-down' style='#{votedown_color}'></span>".html_safe, "#post-#{post.id}", class: "downvote", id: "downvote-#{post.id}" %>
   </div>
   <!-- ajax magic -->
   <% if current_user %>
@@ -31,8 +54,9 @@
     }
   });
 
-  });
+  });//end of upvote ajax
 
+  //downvote ajax
   $( "#downvote-<%= post.id %>" ).click(function() {
 
   $.ajax({
@@ -50,7 +74,7 @@
     }
   });
 
-  });
+  });//end of downvote ajax
   </script>
   <% end %>
   <!-- upvote_post_url(action: :upvote, id: post.id) -->
