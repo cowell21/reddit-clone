@@ -1,4 +1,10 @@
-<div class="link" id="post-<%= post.id %>">
+<div class="link" style="opacity:0.8" id="post-<%= post.id %>">
+<script>
+$( "#post-<%= post.id %>" ).hover(
+  function() { $( this ).css( "opacity", "1.0" ); },
+  function() { $( this ).css( "opacity", "0.8" ); }
+);
+</script>
 
   <!-- rank -->
   <span class="rank">
@@ -36,8 +42,6 @@
     <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,#{votedown_color}); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>".html_safe, "", class: "downvote", id: "downvote-#{post.id}" %>
   </div>
   <!-- ajax magic for voting -->
-
-  <!-- $("#upvote-gly-<%= post.id %>").css({ "background": "-webkit-linear-gradient(orange,white)", "-webkit-background-clip:": "text", "-webkit-text-fill-color": "transparent" }); -->
 
   <% if current_user %>
   <script>
