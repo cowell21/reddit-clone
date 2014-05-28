@@ -1,8 +1,40 @@
+<!-- voting color selection -->
+<% if current_user && !!Vote.find_by_user_id_and_post_id( current_user.id, comment.post_id) %>
+<% vote = Vote.find_by_user_id_and_post_id( current_user.id, comment.post_id) %>
+  <% if vote.value == 0 %>
+    <% voteup_color = "color:lightgrey" %>
+    <% score_color = "color:lightgrey"%>
+    <% votedown_color = "color:lightgrey" %>
+  <% elsif vote.value == -1 %>
+    <% voteup_color = "color:lightgrey" %>
+    <% score_color = "color:purple"%>
+    <% votedown_color = "color:purple" %>
+  <% else%>
+    <% voteup_color = "color:orange" %>
+    <% score_color = "color:orange"%>
+    <% votedown_color = "color:lightgrey" %>
+  <% end %>
+<% else %>
+  <% voteup_color = "color:lightgrey" %>
+  <% score_color = "color:lightgrey"%>
+  <% votedown_color = "color:lightgrey" %>
+<% end %>
+
+  <!-- voting rendering | it's a mess -->
+  <div class="midcol">
+    <span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(grey, white); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; font-size: 16px'></span>
+
+    <span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white, grey); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; font-size: 16px'></span>
+  </div>
+
 <div class="entry">
   <div>
     <p class="tagline">
     <%= link_to "[-]", "#" + comment.id.to_s + "-slide", id: comment.id.to_s + "-slide" %>
     <%= link_to comment.user.username, "#userurl", class: "author" %>
+    <%= "#{rand(5)} " %>points
     <%= time_ago(comment.created_at) %>
     </p>
     <!-- jquery slide hide/unhide -->

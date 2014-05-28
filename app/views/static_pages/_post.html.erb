@@ -9,33 +9,36 @@
 <% if current_user && !!Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
 <% vote = Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
   <% if vote.value == 0 %>
-    <% voteup_color = "color:lightgrey" %>
+    <% voteup_color = "grey" %>
     <% score_color = "color:lightgrey"%>
-    <% votedown_color = "color:lightgrey" %>
+    <% votedown_color = "grey" %>
   <% elsif vote.value == -1 %>
-    <% voteup_color = "color:lightgrey" %>
+    <% voteup_color = "grey" %>
     <% score_color = "color:purple"%>
-    <% votedown_color = "color:purple" %>
+    <% votedown_color = "purple" %>
   <% else%>
-    <% voteup_color = "color:orange" %>
+    <% voteup_color = "orange" %>
     <% score_color = "color:orange"%>
-    <% votedown_color = "color:lightgrey" %>
+    <% votedown_color = "grey" %>
   <% end %>
 <% else %>
-  <% voteup_color = "color:lightgrey" %>
+  <% voteup_color = "grey" %>
   <% score_color = "color:lightgrey"%>
-  <% votedown_color = "color:lightgrey" %>
+  <% votedown_color = "grey" %>
 <% end %>
 
   <!-- voting rendering | it's a mess -->
   <div class="midcol">
-    <%= link_to "<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='#{voteup_color}; font-size: 20px'></span>".html_safe, "", class: "upvote", id: "upvote-#{post.id}" %>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(#{voteup_color},white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>".html_safe, "", class: "upvote", id: "upvote-#{post.id}" %>
     <div id="score-<%= post.id %>" style="<%= score_color %>" class="score">
       <%= post.votes.sum(:value) %>
     </div>
-    <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='#{votedown_color}; font-size: 20px'></span>".html_safe, "", class: "downvote", id: "downvote-#{post.id}" %>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,#{votedown_color}); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>".html_safe, "", class: "downvote", id: "downvote-#{post.id}" %>
   </div>
   <!-- ajax magic for voting -->
+
+  <!-- $("#upvote-gly-<%= post.id %>").css({ "background": "-webkit-linear-gradient(orange,white)", "-webkit-background-clip:": "text", "-webkit-text-fill-color": "transparent" }); -->
+
   <% if current_user %>
   <script>
   $( "#upvote-<%= post.id %>" ).click(function() {
@@ -53,13 +56,13 @@
           var score = data.score;
           $("#score-<%= post.id %>").text(score);
           if (score > oldScore) {
-            $("#upvote-gly-<%= post.id %>").css( "color", "orange" );
+            $("#upvote-<%= post.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(orange,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>");
             $("#score-<%= post.id %>").css( "color", "orange" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#downvote-<%= post.id %>").html( "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,grey); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>" );
           } else {
-            $("#upvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#upvote-<%= post.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(grey,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>");
             $("#score-<%= post.id %>").css( "color", "lightgrey" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#downvote-<%= post.id %>").html( "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,grey); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>" );
           };
         }
       });//end of nested ajax request
@@ -84,13 +87,13 @@
           var score = data.score;
           $("#score-<%= post.id %>").text(score);
           if (score > oldScore) {
-            $("#upvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#upvote-<%= post.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(grey,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>");
             $("#score-<%= post.id %>").css( "color", "lightgrey" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#downvote-<%= post.id %>").html( "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,grey); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>" );
           } else {
-            $("#upvote-gly-<%= post.id %>").css( "color", "lightgrey" );
+            $("#upvote-<%= post.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(grey,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>");
             $("#score-<%= post.id %>").css( "color", "purple" );
-            $("#downvote-gly-<%= post.id %>").css( "color", "purple" );
+            $("#downvote-<%= post.id %>").html( "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,purple); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>" );
           };
         }
       });//end of nested ajax request

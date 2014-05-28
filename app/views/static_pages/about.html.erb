@@ -1,64 +1,29 @@
 <h1>About</h1>
 
-<form method="post" id="" class="usertext">
+    <span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(orange, white);
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px'>
+    </span>
 
-<div class="clearleft"></div>
-
-<table>
-<tbody>
-
-<tr>
-  <th>
-    <label>send this link to</label><br>
-    <span class="little gray">(list of emails or usernames)</span>
-  </th>
-<!-- - -->
-  <td>
-  <textarea rows="4" cols="40" name="share_to" placeholder="email@example.com"></textarea>
-  </td>
-</tr>
-
-<tr>
-  <th>
-  <label>your name</label><br>
-  <span class="little gray">(optional)</span>
-  </th>
-<!-- - -->
-  <td>
-  <input value="<%= current_user.username %>" type="text" size="39" name="share[from]">
-  </td>
-</tr>
-
-<tr>
-  <th>
-    <label>your email</label><br>
-    <span class="little gray">(optional)</span>
-  </th>
-<!-- - -->
-  <td>
-    <input name="share[email]" type="text" size="39">
-  </td>
-</tr>
-
-<tr>
-  <th>
-  <label>message</label>
-  <br>
-  <span class="little gray">(optional)</span>
-  </th>
-<!-- - -->
-  <td>
-  <textarea rows="4" cols="40" name="message"></textarea>
-  </td>
-</tr>
+    <span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white, orange); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; font-size: 24px'></span>
 
 
-<tr><td>
-  </td><td>
-  <button type="submit">share</button>
-  <button>cancel</button>
-</td></tr>
+    <span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(purple, white);
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px'>
+    </span>
 
-</tbody>
-</table>
-</form>
+    <span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white, purple); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; font-size: 24px'></span>
+
+    <span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(grey, white);
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px'>
+    </span>
+
+    <span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white, grey); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; font-size: 24px'></span>
