@@ -5,6 +5,7 @@
     <%= ( @count + idx + 1 ) if @count %>
   </span>
 
+<!-- voting color selection -->
 <% if !!Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
 <% vote = Vote.find_by_user_id_and_post_id( current_user.id, post.id) %>
   <% if vote.value == 0 %>
@@ -13,11 +14,11 @@
     <% votedown_color = "color:grey" %>
   <% elsif vote.value == -1 %>
     <% voteup_color = "color:grey" %>
-    <% score_color = "color:red"%>
-    <% votedown_color = "color:red" %>
+    <% score_color = "color:purple"%>
+    <% votedown_color = "color:purple" %>
   <% else%>
-    <% voteup_color = "color:green" %>
-    <% score_color = "color:green"%>
+    <% voteup_color = "color:orange" %>
+    <% score_color = "color:orange"%>
     <% votedown_color = "color:grey" %>
   <% end %>
 <% else %>
@@ -26,18 +27,19 @@
   <% votedown_color = "color:grey" %>
 <% end %>
 
-  <!-- voting | it's a mess -->
+  <!-- voting rendering | it's a mess -->
   <div class="midcol">
-    <%= link_to "<span class='glyphicon glyphicon-arrow-up' style='#{voteup_color}'></span>".html_safe, "#post-#{post.id}", class: "upvote", id: "upvote-#{post.id}" %>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='#{voteup_color}; font-size: 20px'></span>".html_safe, "", class: "upvote", id: "upvote-#{post.id}" %>
     <div id="score-<%= post.id %>" style="<%= score_color %>" class="score">
       <%= post.votes.sum(:value) %>
     </div>
-    <%= link_to "<span class='glyphicon glyphicon-arrow-down' style='#{votedown_color}'></span>".html_safe, "#post-#{post.id}", class: "downvote", id: "downvote-#{post.id}" %>
+    <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='#{votedown_color}; font-size: 20px'></span>".html_safe, "", class: "downvote", id: "downvote-#{post.id}" %>
   </div>
-  <!-- ajax magic -->
+  <!-- ajax magic for voting -->
   <% if current_user %>
   <script>
   $( "#upvote-<%= post.id %>" ).click(function() {
+  event.preventDefault();
 
   $.ajax({
     url: "<%= upvote_post_url(action: :upvote, id: post.id) %>",
@@ -47,8 +49,18 @@
         url: "<%= post_comments_url(post) %>.json",
         type: "GET",
         success: function (data) {
+          var oldScore = parseInt($("#score-<%= post.id %>").text());
           var score = data.score;
           $("#score-<%= post.id %>").text(score);
+          if (score > oldScore) {
+            $("#upvote-gly-<%= post.id %>").css( "color", "orange" );
+            $("#score-<%= post.id %>").css( "color", "orange" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "grey" );
+          } else {
+            $("#upvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#score-<%= post.id %>").css( "color", "grey" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "grey" );
+          };
         }
       });//end of nested ajax request
     }
@@ -58,6 +70,7 @@
 
   //downvote ajax
   $( "#downvote-<%= post.id %>" ).click(function() {
+    event.preventDefault();
 
   $.ajax({
     url: "<%= downvote_post_url(action: :downvote, id: post.id) %>",
@@ -67,8 +80,18 @@
         url: "<%= post_comments_url(post) %>.json",
         type: "GET",
         success: function (data) {
+          var oldScore = parseInt($("#score-<%= post.id %>").text());
           var score = data.score;
           $("#score-<%= post.id %>").text(score);
+          if (score > oldScore) {
+            $("#upvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#score-<%= post.id %>").css( "color", "grey" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "grey" );
+          } else {
+            $("#upvote-gly-<%= post.id %>").css( "color", "grey" );
+            $("#score-<%= post.id %>").css( "color", "purple" );
+            $("#downvote-gly-<%= post.id %>").css( "color", "purple" );
+          };
         }
       });//end of nested ajax request
     }
@@ -77,9 +100,6 @@
   });//end of downvote ajax
   </script>
   <% end %>
-  <!-- upvote_post_url(action: :upvote, id: post.id) -->
-  <!-- var score = parseInt($('#score-<%= post.id %>').text()) + 1;
-  $("#score-1").text(score); -->
 
   <!-- img logic -->
   <% if post.url.include?(".jpg") || post.url.include?(".gif") %>
