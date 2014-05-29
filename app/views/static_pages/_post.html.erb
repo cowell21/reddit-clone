@@ -1,10 +1,8 @@
-<div class="link" style="opacity:0.85" id="post-<%= post.id %>">
+<div class="link" style="opacity:0.8" id="post-<%= post.id %>">
 <script>
-$( "#post-<%= post.id %>" ).hover( function() {
-  $( this ).css( "opacity", "1.0" );
-  $( this ).css( "background-image: -webkit-radial-gradient(circle, white, black)" );
- },
-  function() { $( this ).css( "opacity", "0.85" ); }
+$( "#post-<%= post.id %>" ).hover(
+  function() { $( this ).css( "opacity", "1.0" ); },
+  function() { $( this ).css( "opacity", "0.8" ); }
 );
 </script>
 
