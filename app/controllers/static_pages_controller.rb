@@ -72,7 +72,7 @@ class StaticPagesController < ApplicationController
         title = post["data"]["title"].slice(0..254)
         url = post["data"]["url"]
         sub = post["data"]["subreddit"]
-        #post["data"]["subreddit"] ? body = post["data"]["selftext_html"] : body = ""
+        post["data"]["subreddit"] ? body = post["data"]["selftext_html"] : body = ""
         Post.create( title: title, url: url, body: body, sub: sub, user_id: 2) unless Post.find_by_title(title)
       end
     end
