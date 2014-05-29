@@ -11,7 +11,9 @@
   <div class="md wiki">
   <h3>About Reddit-Clone</h3>
     <ul>
-      <li>Website was designed by Chris Cowell</li>
+      <li>Designed by Chris Cowell</li>
+      <li>cell: 614-370-9978</li>
+      <li>github: cowell21</li>
     </ul>
   </div><!-- end of wiki -->
 </div>
@@ -73,13 +75,13 @@
 <ul>
 <li>
 <label>username:<br>
-<input name="user[username]" type="text">
+<input id="un" name="user[username]" type="text">
 </label>
 </li>
 
 <li>
 <label>password:<br>
-<input name="user[password]" type="password">
+<input id="pw" name="user[password]" type="password">
 </label>
 </li>
 
@@ -94,6 +96,8 @@
 </ul>
 
 <button class="btn btn-info" type="submit">login</button>
+<br><br>
+<button class="btn btn-info employer" type="submit">Employer Login</button>
 </form>
 </div>
 
@@ -104,6 +108,12 @@
   </div>
 </div>
 <script>
+$( ".employer" ).click(function() {
+  $("#un").val("test1");
+  $("#pw").val("superman");
+  $(".employer").trigger("click");
+});
+
 $(function() {
    $(".upvote").click(function(event){
      event.preventDefault();
