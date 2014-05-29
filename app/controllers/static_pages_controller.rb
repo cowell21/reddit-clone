@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
 
   def update
     operation_add_aww
-    operation_add_game
+    operation_add_funny
     operation_add
     redirect_to new_url
   end
@@ -81,8 +81,8 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def operation_add_game
-    data = JSON[open('http://www.reddit.com/r/gaming/.json').read]
+  def operation_add_funny
+    data = JSON[open('http://www.reddit.com/r/funny/.json').read]
 
     data["data"]["children"].each do |post|
       if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
