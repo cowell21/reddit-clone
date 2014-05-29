@@ -5,13 +5,14 @@ class SessionsController < ApplicationController
   end
 
   def create
+    current_url = params[:url]
     @user = User.find_by_credentials(
     user_params[:username],
     user_params[:password])
 
     if @user
       sign_in(@user)
-      redirect_to root_url
+      redirect_to current_url
     else
       flash.now[:errors] = ["Invalid Username/Password Combo"]
       @user = User.new
@@ -22,7 +23,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to root_url #check
+    redirect_to root_url
   end
 
   private

@@ -19,6 +19,8 @@
 <form method="post" action="<%= users_url %>">
   <input type="hidden" name="authenticity_token"
   value="<%= form_authenticity_token %>">
+  <input type="hidden" name="url"
+  value="<%= request.original_url %>">
   <ul>
     <li>
     <label>username:<br>
@@ -65,6 +67,9 @@
 <form method="post" action="<%= session_url %>">
   <input type="hidden" name="authenticity_token"
   value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="url"
+  value="<%= request.original_url %>">
 <ul>
 <li>
 <label>username:<br>

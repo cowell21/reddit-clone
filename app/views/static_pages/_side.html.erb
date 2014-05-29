@@ -11,6 +11,9 @@
       <input type="hidden" name="authenticity_token"
       value="<%= form_authenticity_token %>">
 
+      <input type="hidden" name="url"
+      value="<%= request.original_url %>">
+
       <input name="user[username]" placeholder="username" type="text">
       <input name="user[password]" placeholder="password" type="password">
 

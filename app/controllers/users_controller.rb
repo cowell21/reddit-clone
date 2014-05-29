@@ -7,10 +7,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    current_url = params[:url]
 
     if @user.save
       sign_in(@user)
-      redirect_to root_url
+      redirect_to current_url
     else
       flash[:errors] = @user.errors.full_messages
       render :new
