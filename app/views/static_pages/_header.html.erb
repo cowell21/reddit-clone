@@ -19,10 +19,14 @@
     </ul>|
 
     <ul class="flat-list sr-bar">
-      <li><%= link_to "funny", root_url(sub: "funny") %> -</li>
-      <li><%= link_to "aww", root_url(sub: "aww") %> -</li>
-      <li><%= link_to "pics", root_url(sub: "pics") %> -</li>
-      <li><%= link_to "AskReddit", root_url(sub: "AskReddit") %></li>
+      <li class="<%= "selected" if params[:sub] == "funny" %>">
+        <%= link_to "funny", root_url(sub: "funny") %> -</li>
+      <li class="<%= "selected" if params[:sub] == "aww" %>">
+        <%= link_to "aww", root_url(sub: "aww") %> -</li>
+      <li class="<%= "selected" if params[:sub] == "pics" %>">
+        <%= link_to "pics", root_url(sub: "pics") %> -</li>
+      <li class="<%= "selected" if params[:sub] == "AskReddit" %>">
+        <%= link_to "AskReddit", root_url(sub: "AskReddit") %></li>
     </ul>
 
     </div>
