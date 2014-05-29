@@ -5,8 +5,9 @@ class StaticPagesController < ApplicationController
 
   def update
     operation_add_aww
+    operation_add_game
     operation_add
-    redirect_to root_url
+    redirect_to new_url
   end
 
   def new
@@ -69,6 +70,19 @@ class StaticPagesController < ApplicationController
 
   def operation_add
     data = JSON[open('http://www.reddit.com/.json').read]
+
+    data["data"]["children"].each do |post|
+      if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
+        title = post["data"]["title"].slice(0..254)
+        url = post["data"]["url"]
+        sub = post["data"]["subreddit"]
+        Post.create( title: title, url: url, sub: sub, user_id: 2) unless Post.find_by_title(title)
+      end
+    end
+  end
+
+  def operation_add_game
+    data = JSON[open('http://www.reddit.com/r/gaming/.json').read]
 
     data["data"]["children"].each do |post|
       if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")

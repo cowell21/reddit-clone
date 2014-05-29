@@ -6,7 +6,7 @@
   </form>
   <br>
 
-  <% unless current_user %>
+  <% unless true %>
     <form method="post" action="<%= session_url %>"  class="jumbotron">
       <input type="hidden" name="authenticity_token"
       value="<%= form_authenticity_token %>">
