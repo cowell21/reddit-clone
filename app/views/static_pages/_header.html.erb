@@ -48,7 +48,7 @@
         <%= link_to current_user.username, user_url(current_user) %> |
         <%= link_to "messages (0)", "#", "data-toggle" => "tooltip", "data-placement" => "bottom", title: "messages system is a todo" %> |
         <%= link_to "preferences", "#" %> |
-        <%= link_to "logout", session_url, method: :delete %>
+        <%= link_to "logout", session_url(url: request.original_url), method: :delete %>
       <% else %>
       want to join?
       <%= link_to "login", "#", "data-toggle" => "modal",

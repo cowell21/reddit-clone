@@ -22,8 +22,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_url = params[:url]
     sign_out
-    redirect_to root_url
+    redirect_to current_url
   end
 
   private
