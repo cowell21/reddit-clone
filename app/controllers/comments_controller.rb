@@ -10,8 +10,6 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
 
-    #isn't required yet "parent_id"
-
     if @comment.save
       redirect_to post_comments_url(@post)
     else
@@ -23,12 +21,6 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find_by_id(params[:id])
-    #
-    # if @comment
-    #   render :show
-    # else
-    #   redirect_to root_url #was subs_url
-    # end
   end
 
   def index
@@ -70,7 +62,6 @@ class CommentsController < ApplicationController
       redirect_to new_session_url
     end
   end
-
 
   private
   def comment_params
