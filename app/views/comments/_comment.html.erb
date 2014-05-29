@@ -1,3 +1,11 @@
+<div id="comment-<%= comment.id %>" style="opacity:0.90">
+<script>
+$( "#comment-<%= comment.id %>" ).hover(
+  function() { $( this ).css( "opacity", "1.0" ); },
+  function() { $( this ).css( "opacity", "0.90" ); }
+);
+</script>
+
 <!-- voting color selection -->
 <% if current_user && !!CommentVote.find_by_user_id_and_comment_id( current_user.id, comment.id) %>
 <% vote = CommentVote.find_by_user_id_and_comment_id( current_user.id, comment.id) %>
@@ -178,6 +186,8 @@
     </ul>
   </div>
 </div>
+
+</div><!-- end comment div -->
 <!-- child div -->
 <div class="child" id="<%= comment.id %>-child">
 
