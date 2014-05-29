@@ -21,14 +21,8 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @posts = query(@posts) if params[:query]
-    @posts = @posts.sort_by(&:sum_votes).reverse
-
-    pagination
-  end
-
-  def newindex
-    @posts = Post.find( :all, :order => "created_at DESC")
-    @posts = query(@posts) if params[:query]
+    @posts = sub(@posts) if params[:sub]
+    @posts = @posts.sort_by(&:sum_votes).reverse if @posts
 
     pagination
   end
@@ -114,6 +108,10 @@ class PostsController < ApplicationController
       arr.push(post) if post.title.downcase.include?(params[:query].downcase)
     end
     arr
+  end
+
+  def sub(posts)
+    posts.select { |post|  post.sub == params[:sub] }
   end
 
 end

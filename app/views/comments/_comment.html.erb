@@ -136,7 +136,14 @@ $( "#comment-<%= comment.id %>" ).hover(
     </div>
 
     <ul class="flat-list buttons" id="<%= comment.id %>-buttons">
-      <li><a href="#">permalink</a></li>
+      <li>
+        <a id="comment-<%= comment.id %>-permalink" href="#">permalink</a>
+      </li>
+      <%= javascript_tag "  $(document).ready(function(){
+        $('#comment-#{comment.id.to_s}-permalink').click(function(){
+          event.preventDefault();
+        });
+      });" %><!-- jquery permalink end -->
 
       <li>
         <%= link_to "save", "#", class: "comment-save-#{comment.id} save" %>
@@ -156,24 +163,37 @@ $( "#comment-<%= comment.id %>" ).hover(
       </li>
 
       <% if comment.parent_id %>
-      <li><a href="#<%= comment.parent_id %>-slide">parent</a></li>
+      <li>
+        <a href="#<%= comment.parent_id %>-slide">parent</a>
+      </li>
       <% end %>
 
-      <li><a href="#">report</a></li>
+      <li>
+        <a id="comment-<%= comment.id %>-report" href="#">report</a>
+        <!-- jquery report -->
+        <%= javascript_tag "  $(document).ready(function(){
+          $('#comment-#{comment.id}-report').click(function(){
+            event.preventDefault();
+            alert('comment id #{comment.id} has been reported to Admin');
+          });
+        });" %><!-- end of jquery report -->
+      </li>
+
       <% if current_user && @depth < 15 %>
       <li>
         <%= link_to "reply", "#comment-" + comment.id.to_s,
          id: "comment-" + comment.id.to_s + "-reply" %>
         <!-- jquery reply -->
-        <%= javascript_tag "  $(document).ready(function(){
+        <%= javascript_tag "$(document).ready(function(){
           $('#comment-#{comment.id.to_s}-reply').click(function(){
             $('##{comment.id}-reply-form').show('slow');
           });
         });" %><!-- jquery reply end -->
-
       </li>
       <% end %>
-      <% if current_user == comment.user  && !comment.body.include?("[comment deleted by") %>
+
+      <% if current_user == comment.user  &&
+       !comment.body.include?("[comment deleted by") %>
       <li>
       <%= link_to "delete",
       post_comment_url(id: comment.id), method: :delete %>

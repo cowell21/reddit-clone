@@ -159,8 +159,8 @@ $( "#post-<%= post.id %>" ).hover(
       <%= link_to "share", "#", class: "share-#{post.id} share" %>
       <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
-        event.preventDefault();
         $('.share-#{post.id.to_s}').click(function(){
+          event.preventDefault();
           if ($('.share-#{post.id.to_s}').text() === 'share') {
             $('##{post.id}-share-form').show('slow');
             $('.share-#{post.id.to_s}').text('cancel');
@@ -169,18 +169,18 @@ $( "#post-<%= post.id %>" ).hover(
             $('.share-#{post.id.to_s}').text('share');
           };
         });
-      });" %><!-- jquery reply end -->
+      });" %>
+      <!-- jquery reply end -->
       <% end %>
     </li>
-
 
     <li>
       <%= link_to "save", "#", class: "link-save-#{post.id} save" %>
       <!-- jquery hide -->
       <% if current_user %>
       <%= javascript_tag "  $(document).ready(function(){
-        event.preventDefault();
         $('.link-save-#{post.id}').click(function(){
+          event.preventDefault();
           if ($('.link-save-#{post.id}').text() === 'save' ){
             $('.link-save-#{post.id}').text('unsave');
           } else {
@@ -195,8 +195,8 @@ $( "#post-<%= post.id %>" ).hover(
       <%= link_to "hide", "#", class: "link-hide-#{post.id}" %>
       <!-- jquery hide -->
       <%= javascript_tag "  $(document).ready(function(){
-        event.preventDefault();
         $('.link-hide-#{ post.id }').click(function(){
+          event.preventDefault();
           $('#post-#{post.id}').fadeOut('slow');
         });
       });" %><!-- jquery hide end -->
@@ -206,7 +206,7 @@ $( "#post-<%= post.id %>" ).hover(
       <!-- jquery report -->
       <%= javascript_tag "  $(document).ready(function(){
         $('#link-report-#{ post.id }').click(function(){
-          alert('post id #{post.id} has been report to Admins');
+          alert('post id #{post.id} has been reported to Admin');
         });
       });" %><!-- end of jquery report -->
       <a href="#" id="link-report-<%= post.id %>">report</a>
