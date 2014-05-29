@@ -7,9 +7,15 @@
     </div>
 
     <ul class="flat-list sr-bar">
-      <li class="selected"><%= link_to "front", root_url %> -</li>
-      <li><%= link_to "all", root_url %> -</li>
-      <li><%= link_to "random", root_url %></li>
+      <li class="<%= "selected" if request.original_url == root_url(params) %>">
+        <%= link_to "front", root_url %> -
+      </li>
+      <li class="<%= "selected" if request.original_url == all_url(params) %>">
+        <%= link_to "all", all_url %> -
+      </li>
+      <li class="<%= "selected" if request.original_url == random_url(params) %>">
+        <%= link_to "random", random_url %>
+      </li>
     </ul>|
 
     <ul class="flat-list sr-bar">
@@ -25,9 +31,15 @@
   <div id="header-bottom-left">
     <%= image_tag("logo.png") %>
     <ul class="tabmenu ">
-      <li class="selected"><%= link_to "hot", "#" %></li>
-      <li><%= link_to "new", "#" %></li>
-      <li><%= link_to "rising", "#" %></li>
+      <li class="<%= "selected" if request.original_url == root_url(params) %>">
+      <%= link_to "hot", root_url %>
+      </li>
+      <li class="<%= "selected" if request.fullpath[0..3] == "/new" %>">
+        <%= link_to "new", new_url %>
+      </li>
+      <li class="<%= "selected" if request.fullpath[0..6] == "/rising" %>">
+        <%= link_to "rising", rising_url %>
+      </li>
     </ul>
   </div>
 

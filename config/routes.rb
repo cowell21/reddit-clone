@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  #root to: 'static_pages#root'
+
   root to: 'posts#index'
 
   resource :session, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :show]
   resources :posts do
-    resources :comments, only: [:create, :new, :show, :index, :destroy]
+    resources :comments, only: [:create, :new, :index, :destroy]
     member do
       get "upvote"
       get "downvote"
@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 
   get '/about' => 'static_pages#about'
   get '/update' => 'static_pages#update'
+  get "/new" => 'static_pages#new'
+  get "/rising" => 'static_pages#rising'
+  get "/all" => 'static_pages#all'
+  get "/random" => 'static_pages#random'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

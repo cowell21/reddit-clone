@@ -1,8 +1,5 @@
 class StaticPagesController < ApplicationController
 
-  def root
-  end
-
   def about
   end
 
@@ -12,7 +9,51 @@ class StaticPagesController < ApplicationController
     redirect_to root_url
   end
 
+  def new
+    @posts = Post.all
+    @posts = @posts.sort_by(&:created_at).reverse
+
+    pagination
+  end
+
+  def rising
+    @posts = Post.all
+    @posts = @posts.sort_by(&:sum_votes).reverse
+
+    pagination
+  end
+
+  def all
+    @posts = Post.all
+    @posts = @posts.sort_by(&:sum_votes).reverse
+
+    pagination
+  end
+
+  def random
+    @posts = Post.all
+    @posts = @posts.shuffle
+
+    pagination
+  end
+
   private
+  def pagination
+    params[:count] ? @count = params[:count].to_i : @count = 0
+    @total = @posts.length
+    @pagesize = 10 # change index page size here
+
+    if @count % @pagesize == 0 && @count < @total
+      if (@count + @pagesize) > @posts.length
+        @posts = @posts[@count...@total]
+      else
+        @posts = @posts[@count...(@count + @pagesize)]
+      end
+    else
+      @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
+    end
+  end
+
   def operation_add_aww
     data = JSON[open('http://www.reddit.com/r/aww/.json').read]
 

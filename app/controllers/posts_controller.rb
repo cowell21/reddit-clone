@@ -22,25 +22,16 @@ class PostsController < ApplicationController
     @posts = Post.all
     @posts = query(@posts) if params[:query]
     @posts = @posts.sort_by(&:sum_votes).reverse
-    params[:count] ? @count = params[:count].to_i : @count = 0
-    @total = @posts.length
-    @pagesize = 10 # change index page size here
 
-    #paganation happens here
-    if @count % @pagesize == 0 && @count < @total
-      if (@count + @pagesize) > @posts.length
-        @posts = @posts[@count...@total]
-      else
-        @posts = @posts[@count...(@count + @pagesize)]
-      end
-    else
-      @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
-    end
-
+    pagination
   end
 
-  # def search
-  # end
+  def newindex
+    @posts = Post.find( :all, :order => "created_at DESC")
+    @posts = query(@posts) if params[:query]
+
+    pagination
+  end
 
   # def edit
   # end
@@ -49,7 +40,7 @@ class PostsController < ApplicationController
   # end
 
   def show
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
   end
 
   def upvote
@@ -83,6 +74,22 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :url, :body, :sub)
+  end
+
+  def pagination
+    params[:count] ? @count = params[:count].to_i : @count = 0
+    @total = @posts.length
+    @pagesize = 10 # change index page size here
+
+    if @count % @pagesize == 0 && @count < @total
+      if (@count + @pagesize) > @posts.length
+        @posts = @posts[@count...@total]
+      else
+        @posts = @posts[@count...(@count + @pagesize)]
+      end
+    else
+      @posts = @posts[0..(@pagesize - 1)] if @total > (@pagesize + 1)
+    end
   end
 
   def url_fix
