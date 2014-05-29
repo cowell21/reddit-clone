@@ -1,8 +1,8 @@
-<div class="link" style="opacity:0.8" id="post-<%= post.id %>">
+<div class="link" style="opacity:0.85" id="post-<%= post.id %>">
 <script>
 $( "#post-<%= post.id %>" ).hover(
   function() { $( this ).css( "opacity", "1.0" ); },
-  function() { $( this ).css( "opacity", "0.8" ); }
+  function() { $( this ).css( "opacity", "0.85" ); }
 );
 </script>
 
@@ -190,13 +190,14 @@ $( "#post-<%= post.id %>" ).hover(
     </li>
 
     <li>
+      <%= link_to "hide", "#", class: "link-hide-#{post.id}" %>
       <!-- jquery hide -->
       <%= javascript_tag "  $(document).ready(function(){
-        $('#link-hide-#{ post.id }').click(function(){
+        event.preventDefault();
+        $('.link-hide-#{ post.id }').click(function(){
           $('#post-#{post.id}').fadeOut('slow');
         });
       });" %><!-- jquery hide end -->
-      <a href="#" id="link-hide-<%= post.id %>">hide</a>
     </li>
 
     <li>

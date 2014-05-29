@@ -15,4 +15,15 @@ class Comment < ActiveRecord::Base
               class_name: "Comment",
               foreign_key: :parent_id,
               primary_key: :id
+
+  has_many :votes,
+            class_name: "CommentVote",
+            foreign_key: :comment_id,
+            primary_key: :id
+
+  def sum_votes
+    # a.votes.sum(:value) <- works like this
+    self.votes.sum(:value)
+  end
+
 end

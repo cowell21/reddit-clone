@@ -47,9 +47,44 @@ class CommentsController < ApplicationController
     # redirect_to post_comments_url(comment.post)
   end
 
+  def upvote
+    if current_user
+
+      @comment = Comment.find(params[:id])
+      vote(1) if current_user
+      redirect_to root_url #failsafe if JS breaks
+    else
+      flash[:errors] = ["Must be logged in to vote"]
+      redirect_to new_session_url
+    end
+  end
+
+  def downvote
+    if current_user
+
+      @comment = Comment.find(params[:id])
+      vote(-1) if current_user
+      redirect_to root_url #failsafe if JS breaks
+    else
+      flash[:errors] = ["Must be logged in to vote"]
+      redirect_to new_session_url
+    end
+  end
+
+
   private
   def comment_params
     params.require(:comment).permit(:body, :parent_id)
+  end
+
+  def vote(direction)
+    @vote = CommentVote.find_by_comment_id_and_user_id(@comment.id, current_user.id)
+
+    if @vote
+      @vote.value == direction ? @vote.update_attributes(value: 0) : @vote.update_attributes(value: direction)
+    else
+      @comment.votes.create(user_id: current_user.id, value: direction)
+    end
   end
 
 end

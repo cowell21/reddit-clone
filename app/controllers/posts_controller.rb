@@ -92,7 +92,6 @@ class PostsController < ApplicationController
   end
 
   def vote(direction)
-
     @vote = Vote.find_by_post_id_and_user_id(@post.id, current_user.id)
 
     if @vote

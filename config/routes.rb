@@ -12,6 +12,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments do
+    member do
+      get "upvote"
+      get "downvote"
+    end
+  end
+
   get '/about' => 'static_pages#about'
   get '/update' => 'static_pages#update'
 

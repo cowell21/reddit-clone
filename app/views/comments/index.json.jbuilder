@@ -14,4 +14,5 @@ json.comments @comments do |comment|
   json.user_id comment.user_id
   json.parent_id comment.parent_id
   json.username comment.user.username
+  json.score comment.votes.sum(:value)
 end
