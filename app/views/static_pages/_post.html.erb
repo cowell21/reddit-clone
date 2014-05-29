@@ -277,7 +277,7 @@ $( "#post-<%= post.id %>" ).hover(
 
         <tr><td>
           </td><td>
-          <button type="submit">share</button>
+          <button id="disa-<%= post.id %>-submit" type="submit">share</button>
           <button id="disa-<%= post.id %>" type="reset">cancel</button>
         </td></tr>
 
@@ -287,6 +287,11 @@ $( "#post-<%= post.id %>" ).hover(
         <!-- jquery reply -->
         <%= javascript_tag "  $(document).ready(function(){
           $('#disa-#{post.id}').click(function(){
+            $('##{post.id}-share-form').slideUp('slow');;
+            $('.share-#{post.id.to_s}').text('share');
+          });
+          $('#disa-#{post.id}-submit').click(function(){
+            event.preventDefault();
             $('##{post.id}-share-form').slideUp('slow');;
             $('.share-#{post.id.to_s}').text('share');
           });
