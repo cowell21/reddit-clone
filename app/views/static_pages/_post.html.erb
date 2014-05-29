@@ -142,7 +142,7 @@ $( "#post-<%= post.id %>" ).hover(
     <% if post.body && request.original_url.include?("comments") %>
     <div class="usertext usertext-body md">
       <div class="md">
-        <p><%= post.body %></p>
+        <p><%= post.body.html_safe %></p>
       </div>
     </div>
     <% end %>

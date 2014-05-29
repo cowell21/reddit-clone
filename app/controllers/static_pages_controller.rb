@@ -4,9 +4,18 @@ class StaticPagesController < ApplicationController
   end
 
   def update
-    operation_add_aww
-    operation_add_funny
-    operation_add
+    json_urls =[
+      "http://www.reddit.com/.json",
+      "http://www.reddit.com/r/aww/.json",
+      "http://www.reddit.com/r/funny/.json",
+      "http://www.reddit.com/r/pics/.json",
+    ]
+    #"http://www.reddit.com/r/AskReddit/.json"
+
+    json_urls.each do |json_url|
+      operation_add(json_url)
+    end
+
     redirect_to new_url
   end
 
@@ -55,41 +64,16 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def operation_add_aww
-    data = JSON[open('http://www.reddit.com/r/aww/.json').read]
+  def operation_add(json_url)
+    data = JSON[open(json_url).read]
 
     data["data"]["children"].each do |post|
       if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
         title = post["data"]["title"].slice(0..254)
         url = post["data"]["url"]
         sub = post["data"]["subreddit"]
-        Post.create( title: title, url: url, sub: sub, user_id: 2) unless Post.find_by_title(title)
-      end
-    end
-  end
-
-  def operation_add
-    data = JSON[open('http://www.reddit.com/.json').read]
-
-    data["data"]["children"].each do |post|
-      if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
-        title = post["data"]["title"].slice(0..254)
-        url = post["data"]["url"]
-        sub = post["data"]["subreddit"]
-        Post.create( title: title, url: url, sub: sub, user_id: 2) unless Post.find_by_title(title)
-      end
-    end
-  end
-
-  def operation_add_funny
-    data = JSON[open('http://www.reddit.com/r/funny/.json').read]
-
-    data["data"]["children"].each do |post|
-      if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
-        title = post["data"]["title"].slice(0..254)
-        url = post["data"]["url"]
-        sub = post["data"]["subreddit"]
-        Post.create( title: title, url: url, sub: sub, user_id: 2) unless Post.find_by_title(title)
+        #post["data"]["subreddit"] ? body = post["data"]["selftext_html"] : body = ""
+        Post.create( title: title, url: url, body: body, sub: sub, user_id: 2) unless Post.find_by_title(title)
       end
     end
   end
