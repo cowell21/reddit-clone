@@ -12,6 +12,8 @@ User.create( username: "test2", password: "superman")
 User.create( username: "test3", password: "superman")
 User.create( username: "test4", password: "superman")
 User.create( username: "test5", password: "superman")
+User.create( username: "test", password: "password")
+
 
 Post.create( title: "Whatcha doin?", url: "http://i.imgur.com/kijXP0K.jpg", user_id: 3)
 Post.create( title: "angry cat", url: "http://i.imgur.com/Uek5LUD.jpg", user_id: 1)

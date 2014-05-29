@@ -1,7 +1,9 @@
 <div class="link" style="opacity:0.85" id="post-<%= post.id %>">
 <script>
-$( "#post-<%= post.id %>" ).hover(
-  function() { $( this ).css( "opacity", "1.0" ); },
+$( "#post-<%= post.id %>" ).hover( function() {
+  $( this ).css( "opacity", "1.0" );
+  $( this ).css( "background-image: -webkit-radial-gradient(circle, white, black)" );
+ },
   function() { $( this ).css( "opacity", "0.85" ); }
 );
 </script>
@@ -36,7 +38,7 @@ $( "#post-<%= post.id %>" ).hover(
   <!-- voting rendering | it's a mess -->
   <div class="midcol">
     <%= link_to "<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{post.id}' style='background: -webkit-linear-gradient(#{voteup_color},white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>".html_safe, "", class: "upvote", id: "upvote-#{post.id}" %>
-    <div id="score-<%= post.id %>" style="<%= score_color %>" class="score">
+    <div id="score-<%= post.id %>" style="<%= score_color %>; font-size: 16px" class="score">
       <%= post.votes.sum(:value) %>
     </div>
     <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{post.id}' style='background: -webkit-linear-gradient(white,#{votedown_color}); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 24px'></span>".html_safe, "", class: "downvote", id: "downvote-#{post.id}" %>
@@ -134,7 +136,7 @@ $( "#post-<%= post.id %>" ).hover(
     <p class="tagline">submitted
       <%= time_ago( post.created_at ) %> by
       <%= link_to post.user.username, user_url(post.user) %>
-      to <a href="#">/r/sub</a><!-- I don't have subs yet -->
+      to <a href="#">/r/<%= post.sub %></a><!-- I don't have subs yet -->
     </p>
 
     <!-- body logic -->

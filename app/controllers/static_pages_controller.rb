@@ -20,7 +20,8 @@ class StaticPagesController < ApplicationController
       if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
         title = post["data"]["title"].slice(0..254)
         url = post["data"]["url"]
-        Post.create( title: title, url: url, user_id: 2) unless Post.find_by_title(title)
+        sub = post["data"]["subreddit"]
+        Post.create( title: title, url: url, sub: sub, user_id: 2) unless Post.find_by_title(title)
       end
     end
   end
@@ -32,7 +33,8 @@ class StaticPagesController < ApplicationController
       if post["data"]["url"].length < 255 && post["data"]["url"].include?(".jpg") || post["data"]["url"].include?(".gif")
         title = post["data"]["title"].slice(0..254)
         url = post["data"]["url"]
-        Post.create( title: title, url: url, user_id: 2) unless Post.find_by_title(title)
+        sub = post["data"]["subreddit"]
+        Post.create( title: title, url: url, sub: sub, user_id: 2) unless Post.find_by_title(title)
       end
     end
   end

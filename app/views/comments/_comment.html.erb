@@ -25,7 +25,7 @@ $( "#comment-<%= comment.id %>" ).hover(
 <% end %>
 
   <!-- voting rendering | it's a mess -->
-  <div class="midcol">
+  <div class="midcol" id="midcol-<%= comment.id %>">
     <%= link_to "<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(#{voteup_color},white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>".html_safe, "#", class: "upvote", id: "upvote-comment-#{comment.id}" %>
 
     <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(white,#{votedown_color}); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>".html_safe, "#", class: "downvote", id: "downvote-comment-#{comment.id}" %>
@@ -112,16 +112,19 @@ $( "#comment-<%= comment.id %>" ).hover(
     <!-- jquery slide hide/unhide -->
     <%= javascript_tag "  $(document).ready(function(){
       $('##{comment.id.to_s}-slide').click(function(){
+        event.preventDefault();
         if( $('##{comment.id}-body').is(':hidden') ) {
           $('##{comment.id}-slide').text('[-]');
+          $('#midcol-#{comment.id}').show('slow');
           $('##{comment.id}-body').show('slow');
           $('##{comment.id}-buttons').show('slow');
-          $('##{comment.id}-child').show('slow');
+          $('#comment-#{comment.id}-child').show('slow');
         } else {
           $('##{comment.id}-slide').text('[+]');
+          $('#midcol-#{comment.id}').slideUp('slow');
           $('##{comment.id}-body').slideUp('slow');
           $('##{comment.id}-buttons').slideUp('slow');
-          $('##{comment.id}-child').slideUp('slow');
+          $('#comment-#{comment.id}-child').slideUp('slow');
         }
       });
     });" %><!-- jquery slide hide/unhide end -->
@@ -189,7 +192,7 @@ $( "#comment-<%= comment.id %>" ).hover(
 
 </div><!-- end comment div -->
 <!-- child div -->
-<div class="child" id="<%= comment.id %>-child">
+<div class="child" id="comment-<%= comment.id %>-child">
 
   <form id="<%= comment.id %>-reply-form" action="<%= post_comments_url %>"
      method="post" class="usertext cloneable" style="display: none;">
