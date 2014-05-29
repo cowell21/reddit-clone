@@ -17,11 +17,19 @@ class Post < ActiveRecord::Base
   def comments_by_parent
     comments_by_parent = Hash.new { |hash, key| hash[key] = [] }
 
-    comments.each do |comment|
+    @comments = comments_sort
+
+    @comments.each do |comment|
       comments_by_parent[comment.parent_id] << comment
     end
 
     comments_by_parent
+  end
+
+  def comments_sort
+    #sum_votes is from the comment model
+    #add more sort methods here
+    comments.sort_by(&:sum_votes).reverse
   end
 
   def sum_votes

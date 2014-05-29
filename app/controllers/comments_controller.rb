@@ -33,7 +33,6 @@ class CommentsController < ApplicationController
 
   def index
     @post = Post.find(params[:post_id])
-    @comments = @post.comments
   end
 
   def destroy
@@ -42,6 +41,7 @@ class CommentsController < ApplicationController
     comment.save
     redirect_to post_comments_url(comment.post)
 
+    # if you want really destroy instead | uncomment below
     # comment = Comment.find(params[:id])
     # comment.destroy
     # redirect_to post_comments_url(comment.post)
