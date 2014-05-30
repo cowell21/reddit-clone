@@ -1,8 +1,10 @@
 Reddit Clone Project
 
+Author: Chris Cowell ( github: cowell21 )
 URL: reddit-clone.com
+Project url: https://github.com/cowell21/reddit-clone
 
-objective: clone reddit.com with a personal touch
+Objective: clone reddit.com with a personal touch
 
 Technologies used
 - Ruby
@@ -17,6 +19,7 @@ Technologies used
 - Google Analytics
 
 Todos:
-sub reddits
-user saves/shares
+user saves/shares backend work
 different comment short methods
+styling issues
+code clean up
