@@ -2,7 +2,7 @@ Reddit Clone Project
 
 Author: Chris Cowell ( github: cowell21 )
 
-URL: reddit-clone.com
+URL: http://reddit-clone.com
 
 Project url: https://github.com/cowell21/reddit-clone
 

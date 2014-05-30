@@ -6,92 +6,9 @@ $( "#comment-<%= comment.id %>" ).hover(
 );
 </script>
 
-<!-- voting color selection -->
-<% if current_user && !!CommentVote.find_by_user_id_and_comment_id( current_user.id, comment.id) %>
-<% vote = CommentVote.find_by_user_id_and_comment_id( current_user.id, comment.id) %>
-  <% if vote.value == 0 %>
-    <% voteup_color = "grey" %>
-    <% votedown_color = "grey" %>
-  <% elsif vote.value == -1 %>
-    <% voteup_color = "grey" %>
-    <% votedown_color = "purple" %>
-  <% else%>
-    <% voteup_color = "orange" %>
-    <% votedown_color = "grey" %>
-  <% end %>
-<% else %>
-  <% voteup_color = "grey" %>
-  <% votedown_color = "grey" %>
-<% end %>
-
-  <!-- voting rendering | it's a mess -->
-  <div class="midcol" id="midcol-<%= comment.id %>">
-    <%= link_to "<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(#{voteup_color},white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>".html_safe, "#", class: "upvote", id: "upvote-comment-#{comment.id}" %>
-
-    <%= link_to "<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(white,#{votedown_color}); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>".html_safe, "#", class: "downvote", id: "downvote-comment-#{comment.id}" %>
-  </div>
-
-  <% if current_user %>
-  <script>
-  $( "#upvote-comment-<%= comment.id %>" ).click(function() {
-  event.preventDefault();
-
-  $.ajax({
-    url: "<%= upvote_comment_url( id: comment.id ) %>",
-    type: "GET",
-    success: function () {
-      $.ajax({
-        url: "<%= post_comment_url(id: comment.id) %>.json",
-        type: "GET",
-        success: function (data) {
-          //http://localhost:3000/posts/1/comments/1.json
-          var oldScore = parseInt($("#comment-score-<%= comment.id %>").text());
-          var score = data.score;
-          $("#comment-score-<%= comment.id %>").text(score + " ");
-          if (score > oldScore) {
-            $("#upvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(orange,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-            $("#downvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(white,grey); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-          } else {
-            $("#upvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(grey,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-            $("#downvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(white,grey); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-          };
-        }
-      });//end of nested ajax request
-    }
-  });
-
-  });//end of upvote ajax
-
-  //downvote ajax
-  $( "#downvote-comment-<%= comment.id %>" ).click(function() {
-    event.preventDefault();
-
-  $.ajax({
-    url: "<%= downvote_comment_url( id: comment.id ) %>",
-    type: "GET",
-    success: function () {
-      $.ajax({
-        url: "<%= post_comment_url(id: comment.id ) %>.json",
-        type: "GET",
-        success: function (data) {
-          var oldScore = parseInt($("#comment-score-<%= comment.id %>").text());
-          var score = data.score;
-          $("#comment-score-<%= comment.id %>").text(score + " ");
-          if (score > oldScore) {
-            $("#upvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(grey,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-            $("#downvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(white,grey); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-          } else {
-            $("#upvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-up' id='upvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(grey,white); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-            $("#downvote-comment-<%= comment.id %>").html("<span class='glyphicon glyphicon-arrow-down' id='downvote-gly-#{comment.id}' style='background: -webkit-linear-gradient(white,purple); -webkit-background-clip:  text; -webkit-text-fill-color: transparent; font-size: 16px'></span>");
-          };
-        }
-      });//end of nested ajax request
-    }
-  });
-
-  });//end of downvote ajax
-  </script>
-  <% end %>
+<!-- voting -->
+<%= render "commentvote", comment: comment %>
+<!-- voting end -->
 
 <div class="entry">
   <div>
