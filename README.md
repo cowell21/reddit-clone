@@ -22,4 +22,5 @@ Todos:
 user saves/shares backend work
 different comment short methods
 styling issues
+about page
 code clean up
