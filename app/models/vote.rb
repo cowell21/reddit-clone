@@ -12,6 +12,4 @@ class Vote < ActiveRecord::Base
   foreign_key: :user_id,
   primary_key: :id
 
-  #test
-
 end

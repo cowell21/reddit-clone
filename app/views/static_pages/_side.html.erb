@@ -6,24 +6,6 @@
   </form>
   <br>
 
-  <% unless true %>
-    <form method="post" action="<%= session_url %>"  class="jumbotron">
-      <input type="hidden" name="authenticity_token"
-      value="<%= form_authenticity_token %>">
-
-      <input type="hidden" name="url"
-      value="<%= request.original_url %>">
-
-      <input name="user[username]" placeholder="username" type="text">
-      <input name="user[password]" placeholder="password" type="password">
-
-      <label><input type="checkbox">remember me</label>
-      <a href="#">reset password</a>
-
-      <button class="btn btn-info">login</button>
-    </form>
-  <% end %>
-
   <%= link_to "Submit a new link", new_post_url(link: true), class: "morelink"%>
   <br>
   <%= link_to "Submit a new text post", new_post_url, class: "morelink" %>
