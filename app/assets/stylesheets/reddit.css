@@ -584,22 +584,22 @@
 	text-align:center;
 	position:relative;
 	border:1px solid #c4dbf1;
-	background:#ffffff none repeat-x scroll center left;
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
-	background-position:0px -278px;
-	background-repeat:repeat;
+  background:-webkit-linear-gradient(white, lightblue);
 	font-size:150%;
 	font-weight:bold;
 	letter-spacing:-1px;
 	line-height:29px;
 	height:29px
+
 }
 .morelink:hover,.mlh
 {
 	border-color:#879eb4;
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
+	background:-webkit-linear-gradient(#c4dbf1, #369);
 	background-position:0px -243px;
-	background-repeat:repeat
+	background-repeat:repeat;
+  font-weight:normal;
+  color:white
 }
 .morelink a
 {
@@ -612,7 +612,7 @@
 }
 .morelink:hover a
 {
-	color:white
+  background:-webkit-linear-gradient(#c4dbf1, #369)
 }
 .morelink .nub
 {
@@ -7803,226 +7803,9 @@
 {
 	display:none
 }
-.gold-accent h1,.gold-accent th
-{
-	color:#6a4d00;
-	font-family:"Hoefler Text","Palatino Linotype","Book Antiqua",Palatino,georgia,garamond,FreeSerif,serif;
-	font-variant:small-caps
-}
-.gold-accent .pretty-form input[type=text]
-{
-	margin-top:1px;
-	margin-bottom:2px;
-	margin-left:0
-}
-.gold-accent .pretty-form input[type=text]#name
-{
-	border-radius:3px
-}
-.gold-accent .pretty-form button
-{
-	background-color:#fff088;
-	color:#6a4d00;
-	border:1px solid #9a7d2e;
-	border-radius:3px
-}
-.gold-expiration-info
-{
-	display:block;
-	margin:3px 0;
-	text-align:center
-}
-.gold-expiration-info .karma
-{
-	color:#583800
-}
-.giftgold
-{
-	margin-bottom:5px
-}
-.giftgold a
-{
-	color:#9a7d2e;
-	font-weight:bold
-}
-.giftgold a:before,.gold-form h1.goldgift:before,.infobar.gold:before
-{
-	/*background-image:url(sprite-reddit.an0Lnf61Ap4.png);*/
-	background-position:-43px -796px;
-	background-repeat:no-repeat
-}
-.gold-form p
-{
-	margin-bottom:8px
-}
-.gold-form .gold-button
-{
-	margin-top:0
-}
 .tiny
 {
 	font-size:xx-small
-}
-.gold-accent.comment-visits-box
-{
-	color:#583800;
-	margin:0px 5px 15px;
-	padding:7px 10px 7px 7px;
-	max-width:550px
-}
-.gold-accent.roundfield
-{
-	margin-top:0px
-}
-.gold-form
-{
-	font-family:"Hoefler Text","Palatino Linotype","Book Antiqua",Palatino,georgia,garamond,FreeSerif,serif;
-	min-height:600px;
-	line-height:22px
-}
-.gold-form .roundfield
-{
-	border:1px solid #E1B000;
-	background-color:#fffdcc;
-	color:#6a4d00;
-	width:510px
-}
-.gold-form .note
-{
-	font-size:13px;
-	line-height:16px;
-	font-style:italic;
-	color:#222;
-	margin-top:7px
-}
-.gold-form p.goldtype-note
-{
-	font-size:13px;
-	line-height:16px;
-	font-style:italic;
-	color:#222;
-	margin-top:7px;
-	margin-top:0;
-	margin-left:22px;
-	padding-bottom:7px;
-	border-bottom:1px solid #e1b000
-}
-.gold-form label:last-of-type
-{
-	padding-right:0
-}
-.gold-form label:last-of-type p.goldtype-note
-{
-	border-bottom:0;
-	padding:0
-}
-.gold-form .spacer
-{
-	margin-top:20px!important
-}
-.gold-subsection
-{
-	display:none;
-	position:absolute
-}
-.gold-form.cloneable-link,.gold-form.cloneable-comment
-{
-	display:none
-}
-.gold-form textarea,.gold-form input[type=text]
-{
-	margin-top:3px
-}
-.gold-form .credit-card-input
-{
-	display:inline
-}
-.gold-form .stripe-submit
-{
-	display:block;
-	margin-top:10px
-}
-.gold-payment form
-{
-	display:inline
-}
-.gold-logo
-{
-	float:left;
-	margin:5px 0
-}
-.thing .gold-form
-{
-	margin:10px 0 10px 4px;
-	min-height:0
-}
-.gold-payment .roundfield-content
-{
-	margin-left:80px
-}
-.gold-payment .close-button
-{
-	width:13px;
-	height:13px;
-	float:right;
-	margin:6px 4px 6px 8px;
-	border:none;
-	background:url(../close.png) no-repeat;
-	text-indent:-9999px;
-	opacity:.25
-}
-.gold-payment .close-button:hover
-{
-	opacity:.55
-}
-.gold-payment .close-button:active
-{
-	position:relative;
-	top:1px
-}
-.giftmessage
-{
-	border:solid #888 1px;
-	color:black;
-	background-color:white;
-	padding:0 10px;
-	margin-bottom:15px;
-	border-radius:3px
-}
-.gold-button
-{
-	padding-top:2px;
-	margin-top:8px;
-	margin-right:8px;
-	color:#482800;
-	background-color:#efcc4c;
-	border-color:#fff088 #fff088 #6a3d00 #6a3d00;
-	font-size:16px;
-	font-family:Palatino,georgia,garamond,FreeSerif,serif;
-	-webkit-appearance:none;
-	text-shadow:0px 1px 0px rgba(255,255,255,0.7)
-}
-.gold-button.disabled,.gold-button:disabled
-{
-	color:#999;
-	background-color:#ccc;
-	border-color:#aaa;
-	text-shadow:none
-}
-.gold-dropdown,.goldvertisement
-{
-	font-family:"Bitstream Charter","Hoefler Text","Palatino Linotype","Book Antiqua",Palatino,georgia,garamond,FreeSerif,serif
-}
-.gold-dropdown
-{
-	color:#482800;
-	background-color:#fff088;
-	font-size:16px
-}
-.gold-expiration-info,.server-seconds
-{
-	padding:6px;
-	border-radius:5px
 }
 .server-seconds
 {
@@ -8112,136 +7895,6 @@
 .infobar.client-info div p
 {
 	white-space:nowrap
-}
-.oauth2-authorize
-{
-	position:relative;
-	background:url(../snoo-tray.png) no-repeat;
-	width:542px;
-	height:235px;
-	margin:40px auto 0;
-	padding-left:268px;
-	padding-top:18px
-}
-.oauth2-authorize h1
-{
-	margin-left:10px
-}
-.oauth2-authorize h1 a
-{
-	font-weight:bold;
-	letter-spacing:-0.04em
-}
-.oauth2-authorize .icon
-{
-	position:absolute;
-	left:160px;
-	top:69px;
-	width:72px;
-	height:72px;
-	line-height:72px;
-	text-align:center;
-	white-space:nowrap
-}
-.oauth2-authorize .icon img
-{
-	vertical-align:middle
-}
-.oauth2-authorize .access,.infobar.client-info
-{
-	background:#f7f7f7;
-	border:1px solid #b3b3b3
-}
-.oauth2-authorize .access
-{
-	position:relative;
-	float:right;
-	width:510px;
-	padding:10px 15px;
-	font-size:1.5em;
-	line-height:1.5em
-}
-.oauth2-authorize .access:before
-{
-	position:absolute;
-	display:block;
-	content:'';
-	border-width:9px;
-	border-style:solid solid outset;
-	border-color:transparent #b3b3b3 transparent transparent;
-	left:-19px;
-	top:13px
-}
-.oauth2-authorize .access:after
-{
-	position:absolute;
-	display:block;
-	content:'';
-	border:9px solid;
-	border-color:transparent #f7f7f7 transparent transparent;
-	left:-18px;
-	top:13px
-}
-.oauth2-authorize .access .notice
-{
-	line-height:normal
-}
-.oauth2-authorize h2
-{
-	font-size:1em;
-	font-weight:normal;
-	color:black
-}
-.oauth2-authorize ul
-{
-	list-style-type:disc;
-	padding-left:25px
-}
-.oauth2-authorize .notice
-{
-	color:#333;
-	font-size:.85em;
-	margin:.5em 0
-}
-.oauth2-authorize .fancybutton
-{
-	margin:0;
-	margin-right:1em;
-	cursor:pointer
-}
-.oauth2-authorize .fancybutton.allow
-{
-	color:white;
-	background:#ff4500;
-	border-color:#541700;
-	box-shadow:inset 0px 1px 0px rgba(255,255,255,0.25);
-	text-shadow:0px 1px 0px rgba(0,0,0,0.7)
-}
-.oauth2-authorize .fancybutton.allow:hover
-{
-	background:#ff571a
-}
-.oauth2-authorize .fancybutton.allow:active
-{
-	background:#eb3f00;
-	box-shadow:inset 0px -1px 0px rgba(255,255,255,0.25)
-}
-.oauth2-authorize .fancybutton.decline
-{
-	color:black;
-	background:#eee;
-	border-color:#555;
-	box-shadow:inset 0px 1px 0px rgba(255,255,255,0.5);
-	text-shadow:0px 1px 0px rgba(255,255,255,0.7)
-}
-.oauth2-authorize .fancybutton.decline:hover
-{
-	background:#f7f7f7
-}
-.oauth2-authorize .fancybutton.decline:active
-{
-	background:#e4e4e4;
-	box-shadow:inset 0px -1px 0px #ffffff
 }
 .modactionlisting table
 {

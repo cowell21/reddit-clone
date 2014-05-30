@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
       "http://www.reddit.com/r/aww/.json",
       "http://www.reddit.com/r/funny/.json",
       "http://www.reddit.com/r/pics/.json",
+      "http://www.reddit.com/r/sports/.json"
     ]
     #"http://www.reddit.com/r/AskReddit/.json"
 
@@ -72,7 +73,8 @@ class StaticPagesController < ApplicationController
         title = post["data"]["title"].slice(0..254)
         url = post["data"]["url"]
         sub = post["data"]["subreddit"]
-        post["data"]["subreddit"] ? body = post["data"]["selftext_html"] : body = ""
+        body = post["data"]["selftext_html"]
+        #post["data"]["selftext_html"] ? body = post["data"]["selftext_html"] : body = ""
         Post.create( title: title, url: url, body: body, sub: sub, user_id: 2) unless Post.find_by_title(title)
       end
     end
