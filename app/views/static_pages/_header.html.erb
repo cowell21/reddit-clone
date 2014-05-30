@@ -25,6 +25,8 @@
         <%= link_to "aww", root_url(sub: "aww") %> -</li>
       <li class="<%= "selected" if params[:sub] == "pics" %>">
         <%= link_to "pics", root_url(sub: "pics") %> -</li>
+      <li class="<%= "selected" if params[:sub] == "sports" %>">
+        <%= link_to "sports", root_url(sub: "sports") %> -</li>
       <li class="<%= "selected" if params[:sub] == "AskReddit" %>">
         <%= link_to "AskReddit", root_url(sub: "AskReddit") %></li>
     </ul>

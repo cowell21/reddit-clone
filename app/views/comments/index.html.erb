@@ -13,11 +13,32 @@
 <div class="menuarea">
   <div class="spacer">
     sorted by:
-    <div class="dropdown lightdrop ">
-    <span class="selected">best</span>
-    </div>
-  </div>
 
+    <div class="btn-group">
+      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+        <% unless params[:sort_type]%>
+        best
+        <% else %>
+        <%= params[:sort_type] == "newest" ? "new" : "old" %>
+        <% end %>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to("best", post_comments_url )%>
+        </li>
+
+        <li>
+          <%= link_to("old", post_comments_url(sort_type: "oldest") )%>
+        </li>
+
+        <li>
+          <%= link_to("new", post_comments_url(sort_type: "newest") )%>
+        </li>
+      </ul>
+    </div>
+
+  </div><!-- end of spacer -->
   <div class="spacer"></div>
 </div>
 
@@ -38,7 +59,7 @@
 
 <!-- Nested Comments -->
 <div class="sitetable nestedlisting">
-  <% comments_by_parent = @post.comments_by_parent %>
+  <% comments_by_parent = @post.comments_by_parent(params[:sort_type]) %>
 
   <% comments_by_parent[nil].each do |top_level_comments| %>
 

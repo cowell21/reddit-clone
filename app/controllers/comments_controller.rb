@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
 
   def index
     @post = Post.find(params[:post_id])
+
   end
 
   def destroy
@@ -33,7 +34,7 @@ class CommentsController < ApplicationController
     comment.save
     redirect_to post_comments_url(comment.post)
 
-    # if you want really destroy instead | uncomment below
+    # if you really want to destroy instead | uncomment below
     # comment = Comment.find(params[:id])
     # comment.destroy
     # redirect_to post_comments_url(comment.post)
@@ -41,7 +42,6 @@ class CommentsController < ApplicationController
 
   def upvote
     if current_user
-
       @comment = Comment.find(params[:id])
       vote(1) if current_user
       redirect_to root_url #failsafe if JS breaks
@@ -53,7 +53,6 @@ class CommentsController < ApplicationController
 
   def downvote
     if current_user
-
       @comment = Comment.find(params[:id])
       vote(-1) if current_user
       redirect_to root_url #failsafe if JS breaks
