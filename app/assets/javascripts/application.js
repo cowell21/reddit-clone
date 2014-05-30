@@ -32,3 +32,11 @@ $(document).ready(function() {
           }
         });
       });
+
+//for devs that investigate code
+console.log("+-------------------------------+")
+console.log("|  Welcome to reddit-clone.com  |")
+console.log("|     Coded by Chris Cowell     |")
+console.log("|      cell: 614-370-9978       |")
+console.log("|       github: cowell21        |")
+console.log("+-------------------------------+")

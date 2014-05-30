@@ -1,5 +1,4 @@
 <%= "<h1>No Results Found!</h1>".html_safe if @posts.length == 0 %>
-<br>
 
 <% @posts.each_with_index do |post, idx| %>
 
@@ -7,12 +6,12 @@
 
 <% end %>
 
-<!-- generates links like localhost:3000/?count=5 -->
 <% if @total > @pagesize %>
 <span class="nextprev">view more:
   <%= link_to("‹ prev", root_url(count: (@count - @pagesize),
    sub: params[:sub], query: params[:query] )
   ) if @count && @count - @pagesize >= 0 %>
+
   <%= link_to("next ›", root_url(count: (@count + @pagesize),
    sub: params[:sub], query: params[:query] )
   ) if @total > @count + @pagesize %>
