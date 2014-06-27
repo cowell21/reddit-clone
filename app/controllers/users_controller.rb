@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  #before_action <-- may need to do
 
   def new
     @user = User.new

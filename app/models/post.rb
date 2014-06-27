@@ -34,7 +34,6 @@ class Post < ActiveRecord::Base
   end
 
   def sum_votes
-    # a.votes.sum(:value) <- works like this
     self.votes.sum(:value)
   end
 
