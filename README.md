@@ -27,3 +27,8 @@ Todos:
 - styling issues
 - about page
 - code clean up
+- condense CSS
+- redo search functionality
+- redo pagination funtionality
+- add column pre-calculated vote counts for posts and comments
+
