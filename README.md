@@ -31,4 +31,5 @@ Todos:
 - redo search functionality
 - redo pagination funtionality
 - add column pre-calculated vote counts for posts and comments
+- consolidate repetitive javascript
 
